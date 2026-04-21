@@ -8,7 +8,7 @@ Python bindings for [TimeSeriesAnalysis](https://github.com/equinor/TimeSeriesAn
 
 ### Python
 
-This project requires **Python 3.13+** and uses [uv](https://docs.astral.sh/uv/) for dependency management and virtual environments.
+This project requires **Python 3.13** and uses [uv](https://docs.astral.sh/uv/) for dependency management and virtual environments.
 
 ### .NET Runtime
 
