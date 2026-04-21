@@ -1,0 +1,25 @@
+[project]
+name = "timeseriesanalysis"
+version = "0.1.0"
+description = "Python bindings for TimeSeriesAnalysis"
+readme = "README.md"
+authors = [
+    { name = "Equinor", email = "equinor" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=2.4.4",
+    "pythonnet>=3.0.5",
+]
+
+[project.scripts]
+timeseriesanalysis = "timeseriesanalysis:main"
+
+[build-system]
+requires = ["uv_build>=0.9.1,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]
