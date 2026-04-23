@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import shutil
 import subprocess
 import sys
@@ -14,7 +15,6 @@ from pathlib import Path
 REPOSITORY_URL = "https://github.com/equinor/TimeSeriesAnalysis.git"
 PROJECT_FILE_NAME = "TimeSeriesAnalysis.csproj"
 OUTPUT_DIRECTORY_NAME = "_assemblies"
-
 
 def _run(command: list[str], *, cwd: Path | None = None) -> None:
     subprocess.run(command, cwd=cwd, check=True)
@@ -29,7 +29,7 @@ def _copy_directory_contents(source: Path, target: Path) -> None:
             shutil.copy2(item, target_path)
 
 
-def publish_assemblies(version_tag: str) -> int:
+def publish_assemblies(revision: str) -> int:
     """Publish the specified upstream release into the project assembly directory."""
     if shutil.which("git") is None:
         print("git is required but was not found on PATH.", file=sys.stderr)
@@ -49,21 +49,29 @@ def publish_assemblies(version_tag: str) -> int:
         return 1
 
     try:
-        print(f"Downloading TimeSeriesAnalysis {version_tag}.")
+        print(f"Downloading TimeSeriesAnalysis {revision}.")
         with tempfile.TemporaryDirectory(prefix="timeseriesanalysis-") as temporary_directory:
             source_directory = Path(temporary_directory) / "TimeSeriesAnalysis"
             _run(
                 [
                     "git",
-                    "clone",
-                    "--depth",
-                    "1",
-                    "--branch",
-                    version_tag,
-                    REPOSITORY_URL,
+                    "init",
                     str(source_directory),
                 ]
             )
+            _run(["git", "remote", "add", "origin", REPOSITORY_URL], cwd=source_directory)
+            _run(
+                [
+                    "git",
+                    "fetch",
+                    "--depth",
+                    "1",
+                    "origin",
+                    revision,
+                ],
+                cwd=source_directory,
+            )
+            _run(["git", "checkout", "--detach", "FETCH_HEAD"], cwd=source_directory)
 
             project_file = source_directory / PROJECT_FILE_NAME
             if not project_file.is_file():
@@ -98,11 +106,30 @@ def publish_assemblies(version_tag: str) -> int:
     return 0
 
 
+def main_ci() -> None:
+    """Publish assemblies from an immutable upstream commit."""
+
+    # Regular expression pattern for validating a 40-character lowercase hexadecimal Git commit hash.
+    COMMIT_HASH_PATTERN = re.compile(r"[0-9a-f]{40}")
+
+    parser = argparse.ArgumentParser(description=main_ci.__doc__)
+    parser.add_argument("commit_hash", help="40-character upstream Git commit hash")
+    arguments = parser.parse_args()
+
+    if not COMMIT_HASH_PATTERN.fullmatch(arguments.commit_hash):
+        parser.error("commit_hash must be a 40-character lowercase hexadecimal Git commit hash")
+
+    raise SystemExit(publish_assemblies(arguments.commit_hash))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("version_tag", help="Git tag to clone and publish, for example v1.0.0")
+    parser.add_argument(
+        "revision",
+        help="Git tag or full commit SHA to fetch and publish, for example v1.0.0",
+    )
     arguments = parser.parse_args()
-    raise SystemExit(publish_assemblies(arguments.version_tag))
+    raise SystemExit(publish_assemblies(arguments.revision))
 
 
 if __name__ == "__main__":
