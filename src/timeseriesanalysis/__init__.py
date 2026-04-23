@@ -1,7 +1,8 @@
+from timeseriesanalysis.dotnet_proxy import DotNetProxy
 from timeseriesanalysis._runtime import Runtime
 from timeseriesanalysis.vec import Vec
 
-__all__ = ["Runtime", "Vec"]
+__all__ = ["DotNetProxy", "Runtime", "Vec"]
 
 # Auto-initialize .NET runtime on import
 Runtime().initialize()

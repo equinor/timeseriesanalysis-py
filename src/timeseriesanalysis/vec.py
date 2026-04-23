@@ -1,13 +1,8 @@
-from typing import Any
+from timeseriesanalysis.dotnet_proxy import DotNetProxy
 
 
-class Vec:
+class Vec(DotNetProxy):
     """Provides access to the .NET TimeSeriesAnalysis.Vec, delegating all attribute access."""
 
-    def __init__(self) -> None:
-        from TimeSeriesAnalysis import Vec as _DotNetVec  # type: ignore[import-untyped]
-
-        self._inner = _DotNetVec()
-
-    def __getattr__(self, name: str) -> Any:
-        return getattr(self._inner, name)
+    _dotnet_module = "TimeSeriesAnalysis"
+    _dotnet_class = "Vec"
