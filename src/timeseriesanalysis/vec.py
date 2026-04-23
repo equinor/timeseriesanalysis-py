@@ -1,13 +1,29 @@
-from typing import Any
+from timeseriesanalysis.dotnet_proxy import DotNetProxy, DotNetStaticProxy
 
 
-class Vec:
+class Vec(DotNetProxy):
     """Provides access to the .NET TimeSeriesAnalysis.Vec, delegating all attribute access."""
 
-    def __init__(self) -> None:
-        from TimeSeriesAnalysis import Vec as _DotNetVec  # type: ignore[import-untyped]
+    _dotnet_module = "TimeSeriesAnalysis"
+    _dotnet_class = "Vec"
 
-        self._inner = _DotNetVec()
 
-    def __getattr__(self, name: str) -> Any:
-        return getattr(self._inner, name)
+class Array2D(DotNetStaticProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.Array2D static class."""
+
+    _dotnet_module = "TimeSeriesAnalysis"
+    _dotnet_class = "Array2D"
+
+
+class Matrix(DotNetStaticProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.Matrix static class."""
+
+    _dotnet_module = "TimeSeriesAnalysis"
+    _dotnet_class = "Matrix"
+
+
+class Index(DotNetStaticProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.Index static class."""
+
+    _dotnet_module = "TimeSeriesAnalysis"
+    _dotnet_class = "Index"
