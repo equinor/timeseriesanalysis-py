@@ -2,7 +2,7 @@
 
 Python bindings for [TimeSeriesAnalysis](https://github.com/equinor/TimeSeriesAnalysis), a C# library for data-driven dynamic modeling and simulation. Uses [pythonnet](https://pythonnet.github.io/) to call the .NET assemblies from Python.
 
-> **Note:** This SDK is under active development. Currently only the `Vec` class is exposed. More bindings will be added over time.
+> **Note:** This SDK is under active development.
 
 ## Prerequisites
 
@@ -20,15 +20,42 @@ Verify the installation:
 dotnet --list-runtimes
 ```
 
-### TimeSeriesAnalysis .NET Assemblies
+### .NET Assemblies
 
-`TimeSeriesAnalysis.dll` is **not included in the repository**. You must obtain and place it locally.
+The following DLLs are **not included in the repository**. You must obtain and place them locally in an `_assemblies/` directory at the project root:
 
-1. Download the [TimeSeriesAnalysis NuGet package](https://www.nuget.org/packages/TimeSeriesAnalysis) and extract `TimeSeriesAnalysis.dll`.
+- `TimeSeriesAnalysis.dll`
+- `Accord.Math.dll`
+- `Accord.Math.Core.dll`
+- `Newtonsoft.Json.dll`
 
-2. Place the DLL in a local directory, e.g. `_assemblies/` at the project root.
+#### Option 1: From NuGet packages
 
-3. Set the `TIMESERIESANALYSIS_ASSEMBLY_PATH` environment variable to the directory containing the DLL.
+Download and extract the DLLs from the following NuGet packages:
+
+- [TimeSeriesAnalysis](https://www.nuget.org/packages/TimeSeriesAnalysis)
+- [Accord.Math](https://www.nuget.org/packages/Accord.Math) (includes `Accord.Math.dll` and `Accord.Math.Core.dll`)
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
+
+You can download `.nupkg` files and extract them (they are ZIP archives), then copy the DLLs from the appropriate `lib/` subfolder.
+
+#### Option 2: Build the .NET project locally
+
+Clone and build [TimeSeriesAnalysis](https://github.com/equinor/TimeSeriesAnalysis) from source:
+
+```bash
+git clone https://github.com/equinor/TimeSeriesAnalysis.git
+cd TimeSeriesAnalysis
+dotnet build -c Release
+```
+
+Copy all four DLLs from the build output (e.g. `bin/Release/net8.0/`) into `_assemblies/`.
+
+---
+
+Place the DLLs in the `_assemblies/` directory at the project root.
+
+3. Set the `TIMESERIESANALYSIS_ASSEMBLY_PATH` environment variable to the directory containing the DLLs.
 
    **Option A**: Create and source a `.env` file (see `.env.example` for the template):
 
@@ -55,8 +82,16 @@ uv sync
 
 ## Usage
 
+The package exposes the following classes:
+
+- **Vec**, **Array2D**, **Index**, **Matrix** – vector and matrix utilities
+- **LowPass**, **HighPass**, **BandPass**, **MovingAvg**, **RecursiveAverage**, **SecondOrder** – signal filters
+- **CorrelationCalculator**, **SignalPeriodEstimator** – analysis tools
+- **TimeSeries**, **TimeSeriesDataSet** – time series data structures
+- **Shared** – shared utilities
+
 ```python
-from timeseriesanalysis import Vec
+from timeseriesanalysis import Vec, LowPass, TimeSeries
 
 vec = Vec()
 result = vec.Add([1.0, 2.0, 3.0], [4.0, 5.0, 6.0])
@@ -65,7 +100,7 @@ result = vec.Add([1.0, 2.0, 3.0], [4.0, 5.0, 6.0])
 
 ## Demo
 
-The included `demo.py` script demonstrates usage of the `Vec` API (add, subtract, multiply, statistics).
+The included `demo.py` script demonstrates basic usage of the `Vec` API.
 
 ### Run in the project venv
 
