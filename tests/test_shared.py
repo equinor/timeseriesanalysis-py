@@ -1,4 +1,4 @@
-from timeseriesanalysis.shared import Shared
+from timeseriesanalysis.core import Shared
 
 
 class TestShared:
