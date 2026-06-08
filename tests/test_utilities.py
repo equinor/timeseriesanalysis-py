@@ -4,7 +4,7 @@ from timeseriesanalysis.utilities import (
     CSV,
     ParserFeedback,
     Plot4Test,
-    SignificantDigit,
+    SignificantDigits,
     TimeSeriesCreator,
     UnixTime
 )
@@ -132,9 +132,9 @@ class TestParserFeedback:
         assert "a warning" in str(first)
 
 
-class TestSignificantDigit:
+class TestSignificantDigits:
     def setup_method(self) -> None:
-        self.sd = SignificantDigit()
+        self.sd = SignificantDigits()
 
     def test_format_scalar_2_digits(self) -> None:
         result = self.sd.Format(1234.0, 2)
