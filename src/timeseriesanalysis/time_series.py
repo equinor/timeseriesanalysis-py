@@ -1,15 +1,17 @@
 from timeseriesanalysis.dotnet_proxy import DotNetProxy, DotNetStaticProxy
 
+_MODULE = "TimeSeriesAnalysis"
+
 
 class TimeSeries(DotNetStaticProxy):
     """Provides access to the .NET TimeSeriesAnalysis.TimeSeries static methods."""
 
-    _dotnet_module = "TimeSeriesAnalysis"
+    _dotnet_module = _MODULE
     _dotnet_class = "TimeSeries"
 
 
 class TimeSeriesDataSet(DotNetProxy):
     """Provides access to the .NET TimeSeriesAnalysis.TimeSeriesDataSet."""
 
-    _dotnet_module = "TimeSeriesAnalysis"
+    _dotnet_module = _MODULE
     _dotnet_class = "TimeSeriesDataSet"
