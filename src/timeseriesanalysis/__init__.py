@@ -11,12 +11,29 @@ from timeseriesanalysis.filters import (
 )
 from timeseriesanalysis.shared import Shared
 from timeseriesanalysis.time_series import TimeSeries, TimeSeriesDataSet
+from timeseriesanalysis.utilities import (
+    CSV,
+    CsvContent,
+    ParserFeedback,
+    Plot,
+    Plot4Test,
+    PlotGain,
+    PlotXY,
+    SigmaXml,
+    SignificantDigit,
+    StringToFileWriter,
+    TimeSeriesCreator,
+    UnixTime,
+    XYTable,
+)
 from timeseriesanalysis.vec import Array2D, Index, Matrix, Vec
 
 __all__ = [
     "Array2D",
     "BandPass",
     "CorrelationCalculator",
+    "CSV",
+    "CsvContent",
     "DotNetProxy",
     "DotNetStaticProxy",
     "HighPass",
@@ -24,14 +41,25 @@ __all__ = [
     "LowPass",
     "Matrix",
     "MovingAvg",
+    "ParserFeedback",
+    "Plot",
+    "Plot4Test",
+    "PlotGain",
+    "PlotXY",
     "RecursiveAverage",
     "Runtime",
     "SecondOrder",
     "Shared",
+    "SigmaXml",
     "SignalPeriodEstimator",
+    "SignificantDigit",
+    "StringToFileWriter",
     "TimeSeries",
+    "TimeSeriesCreator",
     "TimeSeriesDataSet",
+    "UnixTime",
     "Vec",
+    "XYTable",
 ]
 
 # Auto-initialize .NET runtime on import
