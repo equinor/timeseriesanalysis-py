@@ -85,6 +85,9 @@ def main() -> None:
     Runtime().initialize()
 
     if args.stubs:
+        print("Stub generation is currently disabled.", file=sys.stderr)
+        sys.exit(1)
+        # --- stub generation (disabled) ---
         mod = importlib.import_module(args.stubs)
         if args.out:
             out = Path(args.out)

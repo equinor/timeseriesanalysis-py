@@ -121,9 +121,11 @@ No removed types.
 
 Exits with code `0` when proxies are in sync, `1` when there is drift.
 
-### `.pyi` stub generation
+### `.pyi` stub generation *(disabled)*
 
-Generates a type stub (`.pyi`) file alongside the given module's source file, derived from .NET reflection. Run this after adding or updating proxy classes.
+> **Note:** Stub generation is currently disabled. The implementation exists in `type_generation.py` and the `--stubs` flag is accepted by the CLI but exits immediately with an error.
+
+When re-enabled, this will generate a type stub (`.pyi`) file alongside the given module's source file, derived from .NET reflection.
 
 ```bash
 # Write core.pyi next to core.py
@@ -140,7 +142,6 @@ Both commands can also be run without installation:
 
 ```bash
 python -m timeseriesanalysis.internal
-python -m timeseriesanalysis.internal --stubs timeseriesanalysis.core
 ```
 
 ---
