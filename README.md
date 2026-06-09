@@ -100,6 +100,54 @@ result = vec.Add([1.0, 2.0, 3.0], [4.0, 5.0, 6.0])
 # result: [5.0, 7.0, 9.0]
 ```
 
+## Developer CLI
+
+After `uv sync`, the `timeseriesanalysis-internal` command is available for two maintenance tasks.
+
+### Proxy drift detection
+
+Compares the types currently exported by the DLL against the hand-authored proxy classes in this package. Use this after updating `TimeSeriesAnalysis.dll` to find types that need to be added or removed.
+
+```bash
+timeseriesanalysis-internal
+```
+
+Output:
+
+```
+NEW types in DLL (not yet proxied):
+  + SomeNewClass
+
+No removed types.
+```
+
+Exits with code `0` when proxies are in sync, `1` when there is drift.
+
+### `.pyi` stub generation *(disabled)*
+
+> **Note:** Stub generation is currently disabled. The implementation exists in `type_generation.py` and the `--stubs` flag is accepted by the CLI but exits immediately with an error.
+
+When re-enabled, this will generate a type stub (`.pyi`) file alongside the given module's source file, derived from .NET reflection.
+
+```bash
+# Write core.pyi next to core.py
+timeseriesanalysis-internal --stubs timeseriesanalysis.core
+
+# Write to a custom path
+timeseriesanalysis-internal --stubs timeseriesanalysis.core --out /tmp/core.pyi
+
+# Show each generated class stub while writing
+timeseriesanalysis-internal --stubs timeseriesanalysis.core --debug
+```
+
+Both commands can also be run without installation:
+
+```bash
+python -m timeseriesanalysis.internal
+```
+
+---
+
 ## Demo
 
 The included `demo.py` script demonstrates basic usage of the `Vec` API.
