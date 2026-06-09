@@ -27,12 +27,6 @@ class PidFeedForward(DotNetProxy):
     _dotnet_module = _MODULE
 
 
-class PidFiltering(DotNetProxy):
-    """Handles filtering of inputs to a PID-controller."""
-
-    _dotnet_module = _MODULE
-
-
 class PidGainScheduling(DotNetProxy):
     """PID-controller gain-scheduling parameters."""
 
@@ -47,5 +41,23 @@ class PidScaling(DotNetProxy):
 
 class PidTuning(DotNetProxy):
     """PID-controller tuning parameters (Kp, Ti, Td)."""
+
+    _dotnet_module = _MODULE
+
+
+class PidFilter(DotNetProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.Dynamic.PidFilter class."""
+
+    _dotnet_module = _MODULE
+
+
+class PidFilterParams(DotNetProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.Dynamic.PidFilterParams class."""
+
+    _dotnet_module = _MODULE
+
+
+class PidStatus(DotNetProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.Dynamic.PidStatus class."""
 
     _dotnet_module = _MODULE

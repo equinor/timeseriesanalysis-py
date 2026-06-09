@@ -15,19 +15,7 @@ class CommonDataPreprocessor(DotNetStaticProxy):
     _dotnet_module = _MODULE
 
 
-class DatasetDownsampler(DotNetStaticProxy):
-    """Handles downsampling of datasets."""
-
-    _dotnet_module = _MODULE
-
-
 class FrozenDataDetector(DotNetStaticProxy):
     """Determines if data has frozen for any samples."""
-
-    _dotnet_module = _MODULE
-
-
-class OversampledDataDetector(DotNetStaticProxy):
-    """Detects oversampled data in a dataset."""
 
     _dotnet_module = _MODULE

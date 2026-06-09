@@ -3,12 +3,6 @@ from timeseriesanalysis.dotnet_proxy import DotNetProxy, DotNetStaticProxy
 _MODULE = "TimeSeriesAnalysis.Dynamic"
 
 
-class ClosedLoopGainGlobalSearchResults(DotNetProxy):
-    """Results from the global search step of the closed-loop gain identification."""
-
-    _dotnet_module = _MODULE
-
-
 class ClosedLoopUnitIdentifier(DotNetProxy):
     """Identifies a unit model jointly with a disturbance signal under closed-loop control."""
 
@@ -57,19 +51,13 @@ class GainSchedIdentifier(DotNetProxy):
     _dotnet_module = _MODULE
 
 
-class GainSchedSubModelResults(DotNetProxy):
-    """Holds results for a single sub-model within a gain-scheduled identification run."""
-
-    _dotnet_module = _MODULE
-
-
 class PidIdentifier(DotNetProxy):
     """Identifies PID-controller parameters (Kp, Ti) from time-series data."""
 
     _dotnet_module = _MODULE
 
 
-class PidIdentWarnings(DotNetStaticProxy):
+class PidIdentWarning(DotNetStaticProxy):
     """Warnings generated during PID-controller parameter identification."""
 
     _dotnet_module = _MODULE
@@ -81,13 +69,19 @@ class UnitIdentifier(DotNetProxy):
     _dotnet_module = _MODULE
 
 
-class UnitIdentWarnings(DotNetStaticProxy):
+class UnitdentWarnings(DotNetStaticProxy):
     """Warnings generated during unit model identification."""
 
     _dotnet_module = _MODULE
 
 
-class UnitTimeDelayIdentifier(DotNetProxy):
-    """Handles time-delay estimation as part of unit model identification."""
+class DisturbanceEstimationError(DotNetProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.Dynamic.DisturbanceEstimationError class."""
+
+    _dotnet_module = _MODULE
+
+
+class DisturbanceIdResult(DotNetProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.Dynamic.DisturbanceIdResult class."""
 
     _dotnet_module = _MODULE

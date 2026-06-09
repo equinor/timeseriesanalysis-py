@@ -16,12 +16,6 @@ class Array2DExtensionMethods(DotNetProxy):
     _dotnet_class = "Array2DExtensionMethods"
 
 
-class Array2DGeneric(DotNetProxy):
-    """Provides access to the .NET TimeSeriesAnalysis.Array2DGeneric filter."""
-
-    _dotnet_module = _MODULE
-    _dotnet_class = "Array2DGeneric"
-
 # Vector
 class Vec(DotNetProxy):
     """Provides access to the .NET TimeSeriesAnalysis.Vec, delegating all attribute access."""
@@ -30,25 +24,12 @@ class Vec(DotNetProxy):
     _dotnet_class = "Vec"
 
 
-class VecEnums(DotNetProxy):
-    """Provides access to the .NET TimeSeriesAnalysis.VecEnums, delegating all attribute access."""
-
-    _dotnet_module = _MODULE
-    _dotnet_class = "VecEnums"
-
-
 class VecExtensionMethods(DotNetProxy):
     """Provides access to the .NET TimeSeriesAnalysis.VecExtensionMethods, delegating all attribute access."""
 
     _dotnet_module = _MODULE
     _dotnet_class = "VecExtensionMethods"
 
-
-class VecGeneric(DotNetProxy):
-    """Provides access to the .NET TimeSeriesAnalysis.VecGeneric, delegating all attribute access."""
-
-    _dotnet_module = _MODULE
-    _dotnet_class = "VecGeneric"
 
 # Matrix
 class Matrix(DotNetStaticProxy):
@@ -104,3 +85,33 @@ class Shared(DotNetStaticProxy):
 
     _dotnet_module = _MODULE
     _dotnet_class = "Shared"
+
+
+class CorrelationObject(DotNetProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.CorrelationObject class."""
+
+    _dotnet_module = _MODULE
+
+
+class INDEX(DotNetStaticProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.INDEX static class."""
+
+    _dotnet_module = _MODULE
+
+
+class RegressionWarnings(DotNetStaticProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.RegressionWarnings static class."""
+
+    _dotnet_module = _MODULE
+
+
+class VectorFindValueType(DotNetProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.VectorFindValueType enum."""
+
+    _dotnet_module = _MODULE
+
+
+class VectorSortType(DotNetProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.VectorSortType enum."""
+
+    _dotnet_module = _MODULE
