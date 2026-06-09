@@ -51,6 +51,12 @@ class Select(DotNetProxy):
     _dotnet_module = _MODULE
 
 
+class SelectType(DotNetProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.Dynamic.SelectType enum."""
+
+    _dotnet_module = _MODULE
+
+
 class UnitModel(DotNetProxy):
     """Simulatable default process model with time-constant, time-delay and linear/nonlinear gains."""
 

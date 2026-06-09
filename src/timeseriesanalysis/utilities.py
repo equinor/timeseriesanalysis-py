@@ -79,3 +79,21 @@ class XYTable(DotNetProxy):
     """Provides access to the .NET TimeSeriesAnalysis.Utility.XYTable class."""
 
     _dotnet_module = _MODULE
+
+
+class ParserFeedbackLogLine(DotNetProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.Utility.ParserFeedbackLogLine class."""
+
+    _dotnet_module = _MODULE
+
+
+class ParserfeedbackMessageLevel(DotNetProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.Utility.ParserfeedbackMessageLevel enum."""
+
+    _dotnet_module = _MODULE
+
+
+class XYlineType(DotNetProxy):
+    """Provides access to the .NET TimeSeriesAnalysis.Utility.XYlineType enum."""
+
+    _dotnet_module = _MODULE
