@@ -14,6 +14,7 @@ dependencies = [
 
 [project.scripts]
 timeseriesanalysis = "timeseriesanalysis:main"
+timeseriesanalysis-internal = "timeseriesanalysis.internal.__main__:main"
 
 [build-system]
 requires = ["uv_build>=0.9.1,<0.10.0"]
