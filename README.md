@@ -27,6 +27,7 @@ The following DLLs are **not included in the repository**. You must obtain and p
 - `TimeSeriesAnalysis.dll`
 - `Accord.Math.dll`
 - `Accord.Math.Core.dll`
+- `Accord.Statistics.dll`
 - `Newtonsoft.Json.dll`
 
 #### Option 1: From NuGet packages
@@ -35,6 +36,7 @@ Download and extract the DLLs from the following NuGet packages:
 
 - [TimeSeriesAnalysis](https://www.nuget.org/packages/TimeSeriesAnalysis)
 - [Accord.Math](https://www.nuget.org/packages/Accord.Math) (includes `Accord.Math.dll` and `Accord.Math.Core.dll`)
+- [Accord.Statistics](https://www.nuget.org/packages/accord.statistics/)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
 
 You can download `.nupkg` files and extract them (they are ZIP archives), then copy the DLLs from the appropriate `lib/` subfolder.
