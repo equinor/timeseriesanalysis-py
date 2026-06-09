@@ -57,24 +57,24 @@ Copy all four DLLs from the build output (e.g. `bin/Release/net8.0/`) into `_ass
 
 Place the DLLs in the `_assemblies/` directory at the project root.
 
-3. Set the `TIMESERIESANALYSIS_ASSEMBLY_PATH` environment variable to the directory containing the DLLs.
+Set the `TIMESERIESANALYSIS_ASSEMBLY_PATH` environment variable to the directory containing the DLLs.
 
-   **Option A**: Create and source a `.env` file (see `.env.example` for the template):
+  **Option A**: Create and source a `.env` file (see `.env.example` for the template):
 
-   ```bash
-   cp .env.example .env
-   # Edit .env with the actual path
+  ```bash
+  cp .env.example .env
+  # Edit .env with the actual path
 
-   source .env
-   ```
+  source .env
+  ```
 
-   **Option B**: Export directly in your shell:
+  **Option B**: Export directly in your shell:
 
-   ```bash
-   export TIMESERIESANALYSIS_ASSEMBLY_PATH="/path/to/_assemblies"
-   ```
+  ```bash
+  export TIMESERIESANALYSIS_ASSEMBLY_PATH="/path/to/_assemblies"
+  ```
 
-   > **Note:** If using a `.env` file, tools like `uv run --env-file .env` will load it automatically. If sourcing manually, use `set -a && source .env && set +a` to ensure the variable is exported to child processes. Remember to re-source after any changes to `.env`.
+  > **Note:** If using a `.env` file, tools like `uv run --env-file .env` will load it automatically. If sourcing manually, use `set -a && source .env && set +a` to ensure the variable is exported to child processes. Remember to re-source after any changes to `.env`.
 
 ## Installation
 
@@ -84,13 +84,7 @@ uv sync
 
 ## Usage
 
-The package exposes the following classes:
-
-- **Vec**, **Array2D**, **Index**, **Matrix** – vector and matrix utilities
-- **LowPass**, **HighPass**, **BandPass**, **MovingAvg**, **RecursiveAverage**, **SecondOrder** – signal filters
-- **CorrelationCalculator**, **SignalPeriodEstimator** – analysis tools
-- **TimeSeries**, **TimeSeriesDataSet** – time series data structures
-- **Shared** – shared utilities
+The package exposes all public types from the `TimeSeriesAnalysis` .NET library as Python proxy classes. For the full API reference, see the [TimeSeriesAnalysis API documentation](https://equinor.github.io/TimeSeriesAnalysis/api/TimeSeriesAnalysis.html).
 
 ```python
 from timeseriesanalysis import Vec, LowPass, TimeSeries
