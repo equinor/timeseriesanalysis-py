@@ -25,6 +25,7 @@ dotnet --list-runtimes
 The following DLLs are **not included in the repository**. You must obtain and place them locally in an `_assemblies/` directory at the project root:
 
 - `TimeSeriesAnalysis.dll`
+- `Accord.dll`
 - `Accord.Math.dll`
 - `Accord.Math.Core.dll`
 - `Accord.Statistics.dll`
@@ -32,9 +33,12 @@ The following DLLs are **not included in the repository**. You must obtain and p
 
 #### Option 1: From NuGet packages
 
-Download and extract the DLLs from the following NuGet packages:
+On Windows, you can run the PowerShell command `.\scripts\install-assemblies.ps1` to install all the required assemblies from NuGet.
+
+Or, manually download and extract the DLLs from the following NuGet packages:
 
 - [TimeSeriesAnalysis](https://www.nuget.org/packages/TimeSeriesAnalysis)
+- [Accord](https://www.nuget.org/packages/Accord) (includes `Accord.dll`)
 - [Accord.Math](https://www.nuget.org/packages/Accord.Math) (includes `Accord.Math.dll` and `Accord.Math.Core.dll`)
 - [Accord.Statistics](https://www.nuget.org/packages/accord.statistics/)
 - [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json)
@@ -51,7 +55,7 @@ cd TimeSeriesAnalysis
 dotnet build -c Release
 ```
 
-Copy all four DLLs from the build output (e.g. `bin/Release/net8.0/`) into `_assemblies/`.
+Copy the required DLLs from the build output (e.g. `bin/Release/net8.0/`) into `_assemblies/`.
 
 ---
 
@@ -59,27 +63,43 @@ Place the DLLs in the `_assemblies/` directory at the project root.
 
 Set the `TIMESERIESANALYSIS_ASSEMBLY_PATH` environment variable to the directory containing the DLLs.
 
-  **Option A**: Create and source a `.env` file (see `.env.example` for the template):
+On Windows, the included PowerShell script downloads the latest stable `TimeSeriesAnalysis` NuGet package, extracts the required assemblies into `_assemblies/`, and sets `TIMESERIESANALYSIS_ASSEMBLY_PATH` for the current user:
 
-  ```bash
-  cp .env.example .env
-  # Edit .env with the actual path
+```powershell
+.\scripts\install-assemblies.ps1
+```
 
-  source .env
-  ```
+Use `-NoPersistEnvironment` to set the variable only for the current PowerShell session. The script also sets the variable in the current session so it can be followed immediately by `uv run pytest`.
 
-  **Option B**: Export directly in your shell:
+**Option A**: Create and source a `.env` file (see `.env.example` for the template):
 
-  ```bash
-  export TIMESERIESANALYSIS_ASSEMBLY_PATH="/path/to/_assemblies"
-  ```
+```bash
+cp .env.example .env
+# Edit .env with the actual path
 
-  > **Note:** If using a `.env` file, tools like `uv run --env-file .env` will load it automatically. If sourcing manually, use `set -a && source .env && set +a` to ensure the variable is exported to child processes. Remember to re-source after any changes to `.env`.
+source .env
+```
+
+**Option B**: Export directly in your shell:
+
+```bash
+export TIMESERIESANALYSIS_ASSEMBLY_PATH="/path/to/_assemblies"
+```
+
+> **Note:** If using a `.env` file, tools like `uv run --env-file .env` will load it automatically. If sourcing manually, use `set -a && source .env && set +a` to ensure the variable is exported to child processes. Remember to re-source after any changes to `.env`.
 
 ## Installation
 
 ```bash
 uv sync
+```
+
+## Running Tests
+
+Run the complete test suite directly through `uv`:
+
+```powershell
+uv run pytest
 ```
 
 ## Usage
