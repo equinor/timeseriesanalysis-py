@@ -53,6 +53,26 @@ dotnet build -c Release
 
 Copy all four DLLs from the build output (e.g. `bin/Release/net8.0/`) into `_assemblies/`.
 
+#### Option 3: Publish a tagged upstream release
+
+The helper script clones an exact [TimeSeriesAnalysis tag](https://github.com/equinor/TimeSeriesAnalysis/tags) and publishes it locally. It requires Git and the .NET SDK; the .NET runtime alone cannot run `dotnet publish`.
+
+```bash
+python scripts/download_and_publish_assemblies.py <version-tag>
+```
+
+For example:
+
+```bash
+python scripts/download_and_publish_assemblies.py 1.0.0
+```
+
+The script writes the published DLLs to `_assemblies_auto/` and refuses to overwrite an existing directory. While this test directory is in use, point the runtime to it:
+
+```bash
+export TIMESERIESANALYSIS_ASSEMBLY_PATH="$PWD/_assemblies_auto"
+```
+
 ---
 
 Place the DLLs in the `_assemblies/` directory at the project root.
