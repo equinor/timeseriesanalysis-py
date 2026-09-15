@@ -85,3 +85,9 @@ class DisturbanceIdResult(DotNetProxy):
     """Provides access to the .NET TimeSeriesAnalysis.Dynamic.DisturbanceIdResult class."""
 
     _dotnet_module = _MODULE
+
+
+class BadIndicesHandlingEnum(DotNetProxy):
+    """Enumeration for handling bad indices in time-series data."""
+
+    _dotnet_module = _MODULE
