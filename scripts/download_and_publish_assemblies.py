@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch and publish the latest stable TimeSeriesAnalysis release."""
+"""Fetch and publish a specified TimeSeriesAnalysis release."""
 
 import argparse
 import shutil
@@ -17,6 +17,14 @@ OUTPUT_DIRECTORY_NAME = "_assemblies_auto"
 def run(command: list[str], *, cwd: Path | None = None) -> None:
     subprocess.run(command, cwd=cwd, check=True)
 
+
+def copy_directory_contents(source: Path, target: Path) -> None:
+    for item in source.iterdir():
+        target_path = target / item.name
+        if item.is_dir():
+            shutil.copytree(item, target_path)
+        else:
+            shutil.copy2(item, target_path)
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -60,7 +68,7 @@ def main() -> int:
             if not project_file.is_file():
                 raise RuntimeError(f"Expected project file was not found: {project_file}")
 
-            output_directory.mkdir(exist_ok=True)
+            staging_directory = Path(temporary_directory) / "Staging"
             run(
                 [
                     "dotnet",
@@ -69,9 +77,13 @@ def main() -> int:
                     "--configuration",
                     "Release",
                     "--output",
-                    str(output_directory),
+                    str(staging_directory),
                 ]
             )
+
+            output_directory.mkdir(exist_ok=True)
+            copy_directory_contents(staging_directory, output_directory)
+
     except (OSError, subprocess.CalledProcessError, RuntimeError) as error:
         print(f"Failed to publish TimeSeriesAnalysis: {error}", file=sys.stderr)
         return 1

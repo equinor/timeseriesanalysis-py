@@ -64,7 +64,7 @@ python scripts/download_and_publish_assemblies.py <version-tag>
 For example:
 
 ```bash
-python scripts/download_and_publish_assemblies.py 1.0.0
+python scripts/download_and_publish_assemblies.py v1.2.34
 ```
 
 The script writes the published DLLs to `_assemblies_auto/` and refuses to overwrite an existing directory. While this test directory is in use, point the runtime to it:
