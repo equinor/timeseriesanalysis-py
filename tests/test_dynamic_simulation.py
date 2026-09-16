@@ -51,7 +51,9 @@ class TestDynamicSimulation:
             tsc.Step(N // 4, N, 0, 1),
         )
         inputData.Add(
-            sim.AddExternalSignal(process, sig_type.External_U, 1),  # external step on input[1]
+            sim.AddExternalSignal(
+                process, sig_type.External_U, 1
+            ),  # external step on input[1]
             tsc.Step(N // 2, N, 0, 1),
         )
         inputData.CreateTimestamps(timeBase_s)

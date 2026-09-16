@@ -14,6 +14,7 @@ REPOSITORY_URL = "https://github.com/equinor/TimeSeriesAnalysis.git"
 PROJECT_FILE_NAME = "TimeSeriesAnalysis.csproj"
 OUTPUT_DIRECTORY_NAME = "_assemblies"
 
+
 def _run(command: list[str], *, cwd: Path | None = None) -> None:
     subprocess.run(command, cwd=cwd, check=True)
 
@@ -48,7 +49,9 @@ def publish_assemblies(revision: str) -> int:
 
     try:
         print(f"Downloading TimeSeriesAnalysis {revision}.")
-        with tempfile.TemporaryDirectory(prefix="timeseriesanalysis-") as temporary_directory:
+        with tempfile.TemporaryDirectory(
+            prefix="timeseriesanalysis-"
+        ) as temporary_directory:
             source_directory = Path(temporary_directory) / "TimeSeriesAnalysis"
             _run(
                 [
@@ -57,7 +60,9 @@ def publish_assemblies(revision: str) -> int:
                     str(source_directory),
                 ]
             )
-            _run(["git", "remote", "add", "origin", REPOSITORY_URL], cwd=source_directory)
+            _run(
+                ["git", "remote", "add", "origin", REPOSITORY_URL], cwd=source_directory
+            )
             _run(
                 [
                     "git",
@@ -73,7 +78,9 @@ def publish_assemblies(revision: str) -> int:
 
             project_file = source_directory / PROJECT_FILE_NAME
             if not project_file.is_file():
-                raise RuntimeError(f"Expected project file was not found: {project_file}")
+                raise RuntimeError(
+                    f"Expected project file was not found: {project_file}"
+                )
 
             staging_directory = Path(temporary_directory) / "Staging"
             _run(
@@ -92,7 +99,10 @@ def publish_assemblies(revision: str) -> int:
             try:
                 _copy_directory_contents(staging_directory, output_directory)
             except (OSError, shutil.Error) as error:
-                print(f"Failed to copy contents to output directory: {error}", file=sys.stderr)
+                print(
+                    f"Failed to copy contents to output directory: {error}",
+                    file=sys.stderr,
+                )
                 shutil.rmtree(output_directory, ignore_errors=True)
                 return 1
 
@@ -115,7 +125,9 @@ def main_ci() -> None:
     arguments = parser.parse_args()
 
     if not COMMIT_HASH_PATTERN.fullmatch(arguments.commit_hash):
-        parser.error("commit_hash must be a 40-character lowercase hexadecimal Git commit hash")
+        parser.error(
+            "commit_hash must be a 40-character lowercase hexadecimal Git commit hash"
+        )
 
     raise SystemExit(publish_assemblies(arguments.commit_hash))
 

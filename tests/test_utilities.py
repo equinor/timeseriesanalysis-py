@@ -170,6 +170,7 @@ class TestPlot4Test:
         # Just verify no exception is raised
         assert int(p4t.GetNumberOfPlotsMade()) == 0
 
+
 class TestCSV:
     def test_robust_parse_double_valid(self) -> None:
         csv = CSV()

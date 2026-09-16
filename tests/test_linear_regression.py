@@ -40,5 +40,3 @@ class TestTimeSeriesDataSet:
         for est, true in zip(results.Gains, true_gains):
             assert est == pytest.approx(true, abs=0.1)
         assert results.Bias == pytest.approx(true_bias, abs=0.1)
-
-        
