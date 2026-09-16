@@ -32,6 +32,12 @@ jobs:
       - name: Install dependencies
         run: uv sync --locked --group dev
 
+      - name: Check formatting
+        run: uv run ruff format --check
+
+      - name: Lint
+        run: uv run ruff check
+
       - name: Publish assemblies
         run: uv run publish-assemblies-ci c8d65e97fe8a0ce8b79d3d8dd3867de4bbe6edaf # v1.4.38
 
