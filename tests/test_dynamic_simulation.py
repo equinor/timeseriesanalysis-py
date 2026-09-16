@@ -1,5 +1,6 @@
 import pytest
 
+from timeseriesanalysis.proxies.core import TimeSeriesDataSet
 from timeseriesanalysis.proxies.dynamic import (
     PidModel,
     PidParameters,
@@ -7,7 +8,6 @@ from timeseriesanalysis.proxies.dynamic import (
     UnitModel,
     UnitParameters,
 )
-from timeseriesanalysis.proxies.core import TimeSeriesDataSet
 from timeseriesanalysis.proxies.dynamic.plantsimulator import PlantSimulator
 from timeseriesanalysis.proxies.utilities import TimeSeriesCreator
 from timeseriesanalysis.system_types import DoubleArray, ModelList
@@ -51,7 +51,9 @@ class TestDynamicSimulation:
             tsc.Step(N // 4, N, 0, 1),
         )
         inputData.Add(
-            sim.AddExternalSignal(process, sig_type.External_U, 1),  # external step on input[1]
+            sim.AddExternalSignal(
+                process, sig_type.External_U, 1
+            ),  # external step on input[1]
             tsc.Step(N // 2, N, 0, 1),
         )
         inputData.CreateTimestamps(timeBase_s)

@@ -34,8 +34,10 @@ class DotNetProxy:
     def __getattr__(self, name: str) -> Any:
         attr = getattr(self._inner, name)
         if callable(attr):
+
             def _wrapper(*args: Any, **kwargs: Any) -> Any:
                 return attr(*tuple(_unwrap(a) for a in args), **kwargs)
+
             return _wrapper
         return attr
 

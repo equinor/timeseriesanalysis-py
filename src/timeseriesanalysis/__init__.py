@@ -1,5 +1,21 @@
 from timeseriesanalysis._runtime import Runtime
 from timeseriesanalysis.dotnet_proxy import DotNetProxy, DotNetStaticProxy
+from timeseriesanalysis.proxies.core import (
+    INDEX,
+    Array2D,
+    CorrelationCalculator,
+    CorrelationObject,
+    Index,
+    Matrix,
+    RegressionWarnings,
+    Shared,
+    SignalPeriodEstimator,
+    TimeSeries,
+    TimeSeriesDataSet,
+    Vec,
+    VectorFindValueType,
+    VectorSortType,
+)
 from timeseriesanalysis.proxies.dynamic import (
     BadDataFinder,
     ClosedLoopUnitIdentifier,
@@ -65,22 +81,6 @@ from timeseriesanalysis.proxies.filters import (
     RecursiveAverage,
     SecondOrder,
 )
-from timeseriesanalysis.proxies.core import (
-    Array2D,
-    CorrelationCalculator,
-    CorrelationObject,
-    INDEX,
-    Index,
-    Matrix,
-    RegressionWarnings,
-    Shared,
-    SignalPeriodEstimator,
-    TimeSeries,
-    TimeSeriesDataSet,
-    Vec,
-    VectorFindValueType,
-    VectorSortType,
-)
 from timeseriesanalysis.proxies.utilities import (
     CSV,
     CsvContent,
@@ -101,6 +101,8 @@ from timeseriesanalysis.proxies.utilities import (
 )
 
 __all__ = [
+    "CSV",
+    "INDEX",
     "Array2D",
     "Array2DExtensionMethods",
     "BadDataFinder",
@@ -111,7 +113,6 @@ __all__ = [
     "ConnectionParser",
     "CorrelationCalculator",
     "CorrelationObject",
-    "CSV",
     "CsvContent",
     "DisturbanceCalculator",
     "DisturbanceEstimationError",
@@ -125,13 +126,12 @@ __all__ = [
     "FittingSpecs",
     "FrozenDataDetector",
     "GainSchedFittingSpecs",
-    "GainSchedIdentifier",
     "GainSchedIdentWarnings",
+    "GainSchedIdentifier",
     "GainSchedModel",
     "GainSchedParameters",
     "GainSchedWarnings",
     "HighPass",
-    "INDEX",
     "Index",
     "LowPass",
     "Matrix",
@@ -149,8 +149,8 @@ __all__ = [
     "PidFilter",
     "PidFilterParams",
     "PidGainScheduling",
-    "PidIdentifier",
     "PidIdentWarning",
+    "PidIdentifier",
     "PidModel",
     "PidModelInputsIdx",
     "PidParameters",
@@ -180,22 +180,22 @@ __all__ = [
     "SignalType",
     "SignificantDigits",
     "StringToFileWriter",
-    "TimeSeries",
     "TimeDelay",
     "TimeDelaySamples",
+    "TimeSeries",
     "TimeSeriesCreator",
     "TimeSeriesDataSet",
     "UnitDataSet",
-    "UnitdentWarnings",
     "UnitIdentifier",
     "UnitModel",
     "UnitParameters",
+    "UnitdentWarnings",
     "UnixTime",
     "Vec",
     "VectorFindValueType",
     "VectorSortType",
-    "XYlineType",
     "XYTable",
+    "XYlineType",
 ]
 
 # Auto-initialize .NET runtime on import

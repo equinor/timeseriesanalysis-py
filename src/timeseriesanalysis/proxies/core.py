@@ -2,12 +2,14 @@ from timeseriesanalysis.dotnet_proxy import DotNetProxy, DotNetStaticProxy
 
 _MODULE = "TimeSeriesAnalysis"
 
+
 # Array
 class Array2D(DotNetStaticProxy):
     """Provides access to the .NET TimeSeriesAnalysis.Array2D static class."""
 
     _dotnet_module = _MODULE
     _dotnet_class = "Array2D"
+
 
 class Array2DExtensionMethods(DotNetProxy):
     """Provides access to the .NET TimeSeriesAnalysis.Array2DExtensionMethods filter."""
@@ -45,6 +47,7 @@ class Index(DotNetStaticProxy):
     _dotnet_module = _MODULE
     _dotnet_class = "Index"
 
+
 # Time Series
 class TimeSeries(DotNetStaticProxy):
     """Provides access to the .NET TimeSeriesAnalysis.TimeSeries static methods."""
@@ -58,6 +61,7 @@ class TimeSeriesDataSet(DotNetProxy):
 
     _dotnet_module = _MODULE
     _dotnet_class = "TimeSeriesDataSet"
+
 
 # Analysis
 class CorrelationCalculator(DotNetStaticProxy):
@@ -73,11 +77,13 @@ class SignalPeriodEstimator(DotNetStaticProxy):
     _dotnet_module = _MODULE
     _dotnet_class = "SignalPeriodEstimator"
 
+
 class RegressionResults(DotNetProxy):
     """Provides access to the .NET TimeSeriesAnalysis.RegressionResults filter."""
 
     _dotnet_module = _MODULE
     _dotnet_class = "RegressionResults"
+
 
 # Shared
 class Shared(DotNetStaticProxy):

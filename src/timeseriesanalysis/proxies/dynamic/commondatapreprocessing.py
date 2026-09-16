@@ -1,4 +1,4 @@
-from timeseriesanalysis.dotnet_proxy import DotNetProxy, DotNetStaticProxy
+from timeseriesanalysis.dotnet_proxy import DotNetStaticProxy
 
 _MODULE = "TimeSeriesAnalysis.Dynamic"
 
