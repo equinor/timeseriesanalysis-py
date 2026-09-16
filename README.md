@@ -22,14 +22,14 @@ dotnet --list-runtimes
 
 ### .NET Assemblies
 
-The `TimeSeriesAnalysis` assemblies must be made available in the project. Run the `publish-assemblies` helper script to automatically fetch and make them available.
+The `TimeSeriesAnalysis` assemblies must be made available in the project. Run the `publish-assemblies` helper script with a revision argument to automatically fetch and make them available.
 
 ```bash
-# Assuming v1.2.34 is the relevant TimeSeriesAnalysis .NET package version
+# Using v1.2.34 as example package revision
 uv run publish-assemblies v1.2.34
 ```
 
-Alternatively, download them manually and place them in a top-level `_assemblies` directory, and set the `TIMESERIESANALYSIS_ASSEMBLY_PATH` environment variable to the directory containing the DLLs.
+> **Note:** Alternatively, download them manually and place them in a top-level `_assemblies` directory, and set the `TIMESERIESANALYSIS_ASSEMBLY_PATH` environment variable to the directory containing the DLLs.
 
 ## Installation
 
@@ -83,7 +83,7 @@ generate-type-stubs
 Downloads the specified `TimeSeriesAnalysis` release, publishes its .NET project, and copies the resulting assembly files into the package. The command requires `git` and the .NET SDK on `PATH`, and refuses to overwrite an existing `_assemblies` directory.
 
 ```bash
-publish-assemblies v1.4.35
+publish-assemblies vX.Y.Z
 ```
 
 ---
