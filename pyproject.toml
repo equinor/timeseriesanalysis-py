@@ -14,13 +14,16 @@ dependencies = [
 
 [project.scripts]
 timeseriesanalysis = "timeseriesanalysis:main"
-check-missing-classes = "tools.class_discovery:main"
-generate-type-stubs = "tools.type_generation:main"
-publish-assemblies = "tools.publish_assemblies:main"
+check-missing-classes = "cli.class_discovery:main"
+generate-type-stubs = "cli.type_generation:main"
+publish-assemblies = "cli.publish_assemblies:main"
 
 [build-system]
 requires = ["uv_build>=0.9.1,<0.10.0"]
 build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = ["timeseriesanalysis", "cli"]
 
 [dependency-groups]
 dev = [

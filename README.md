@@ -22,9 +22,7 @@ dotnet --list-runtimes
 
 ### .NET Assemblies
 
-The `TimeSeriesAnalusis` assemblies must be made available in the project.
-
-Run the `publish-assemblies` helper script to automatically fetch and make them available.
+The `TimeSeriesAnalysis` assemblies must be made available in the project. Run the `publish-assemblies` helper script to automatically fetch and make them available.
 
 ```bash
 # Assuming v1.2.34 is the relevant TimeSeriesAnalysis .NET package version

@@ -85,7 +85,7 @@ def publish_assemblies(version_tag: str) -> int:
             output_directory.mkdir()
             try:
                 _copy_directory_contents(staging_directory, output_directory)
-            except OSError as error:
+            except (OSError, shutil.Error) as error:
                 print(f"Failed to copy contents to output directory: {error}", file=sys.stderr)
                 shutil.rmtree(output_directory, ignore_errors=True)
                 return 1
