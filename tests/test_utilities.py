@@ -1,6 +1,6 @@
 import pytest
 
-from timeseriesanalysis.utilities import (
+from timeseriesanalysis.proxies.utilities import (
     CSV,
     ParserFeedback,
     Plot4Test,

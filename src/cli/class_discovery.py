@@ -33,18 +33,18 @@ NAMESPACE_MAP: dict[str, str] = {
 
 # All hand-authored leaf modules that contain proxy classes.
 HAND_AUTHORED_MODULE_NAMES = [
-    "timeseriesanalysis.core",
-    "timeseriesanalysis.utilities",
-    "timeseriesanalysis.filters.filters",
-    "timeseriesanalysis.dynamic.commondatapreprocessing",
-    "timeseriesanalysis.dynamic.gainscheduling",
-    "timeseriesanalysis.dynamic.identification",
-    "timeseriesanalysis.dynamic.interfaces",
-    "timeseriesanalysis.dynamic.pid",
-    "timeseriesanalysis.dynamic.plantsimulator",
-    "timeseriesanalysis.dynamic.simulatablemodels",
-    "timeseriesanalysis.dynamic.timedelay",
-    "timeseriesanalysis.dynamic.unitdataset",
+    "timeseriesanalysis.proxies.core",
+    "timeseriesanalysis.proxies.utilities",
+    "timeseriesanalysis.proxies.filters.filters",
+    "timeseriesanalysis.proxies.dynamic.commondatapreprocessing",
+    "timeseriesanalysis.proxies.dynamic.gainscheduling",
+    "timeseriesanalysis.proxies.dynamic.identification",
+    "timeseriesanalysis.proxies.dynamic.interfaces",
+    "timeseriesanalysis.proxies.dynamic.pid",
+    "timeseriesanalysis.proxies.dynamic.plantsimulator",
+    "timeseriesanalysis.proxies.dynamic.simulatablemodels",
+    "timeseriesanalysis.proxies.dynamic.timedelay",
+    "timeseriesanalysis.proxies.dynamic.unitdataset",
 ]
 
 

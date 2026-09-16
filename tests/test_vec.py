@@ -1,6 +1,6 @@
 import pytest
 
-from timeseriesanalysis.core import Vec
+from timeseriesanalysis.proxies.core import Vec
 
 
 @pytest.fixture

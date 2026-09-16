@@ -1,4 +1,4 @@
-from timeseriesanalysis.filters.filters import (
+from timeseriesanalysis.proxies.filters.filters import (
     BandPass,
     HighPass,
     LowPass,

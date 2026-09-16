@@ -1,6 +1,6 @@
 from timeseriesanalysis._runtime import Runtime
 from timeseriesanalysis.dotnet_proxy import DotNetProxy, DotNetStaticProxy
-from timeseriesanalysis.dynamic import (
+from timeseriesanalysis.proxies.dynamic import (
     BadDataFinder,
     ClosedLoopUnitIdentifier,
     Comment,
@@ -57,7 +57,7 @@ from timeseriesanalysis.dynamic import (
     UnitModel,
     UnitParameters,
 )
-from timeseriesanalysis.filters import (
+from timeseriesanalysis.proxies.filters import (
     BandPass,
     HighPass,
     LowPass,
@@ -65,7 +65,7 @@ from timeseriesanalysis.filters import (
     RecursiveAverage,
     SecondOrder,
 )
-from timeseriesanalysis.core import (
+from timeseriesanalysis.proxies.core import (
     Array2D,
     CorrelationCalculator,
     CorrelationObject,
@@ -81,7 +81,7 @@ from timeseriesanalysis.core import (
     VectorFindValueType,
     VectorSortType,
 )
-from timeseriesanalysis.utilities import (
+from timeseriesanalysis.proxies.utilities import (
     CSV,
     CsvContent,
     ParserFeedback,

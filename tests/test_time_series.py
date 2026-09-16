@@ -1,6 +1,6 @@
 import pytest
 
-from timeseriesanalysis.core import TimeSeries, TimeSeriesDataSet
+from timeseriesanalysis.proxies.core import TimeSeries, TimeSeriesDataSet
 
 
 class TestTimeSeries:

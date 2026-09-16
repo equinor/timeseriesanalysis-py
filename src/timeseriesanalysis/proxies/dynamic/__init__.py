@@ -1,10 +1,10 @@
-from timeseriesanalysis.dynamic.commondatapreprocessing import (
+from timeseriesanalysis.proxies.dynamic.commondatapreprocessing import (
     BadDataFinder,
     CommonDataPreprocessor,
     FrozenDataDetector,
 )
-from timeseriesanalysis.dynamic.gainscheduling import GainSchedWarnings
-from timeseriesanalysis.dynamic.identification import (
+from timeseriesanalysis.proxies.dynamic.gainscheduling import GainSchedWarnings
+from timeseriesanalysis.proxies.dynamic.identification import (
     ClosedLoopUnitIdentifier,
     DisturbanceCalculator,
     DisturbanceEstimationError,
@@ -20,11 +20,11 @@ from timeseriesanalysis.dynamic.identification import (
     UnitIdentifier,
     UnitdentWarnings,
 )
-from timeseriesanalysis.dynamic.interfaces import (
+from timeseriesanalysis.proxies.dynamic.interfaces import (
     ModelBaseClass,
     ModelParametersBaseClass,
 )
-from timeseriesanalysis.dynamic.pid import (
+from timeseriesanalysis.proxies.dynamic.pid import (
     PidAntiSurgeParams,
     PidController,
     PidControllerType,
@@ -36,7 +36,7 @@ from timeseriesanalysis.dynamic.pid import (
     PidStatus,
     PidTuning,
 )
-from timeseriesanalysis.dynamic.plantsimulator import (
+from timeseriesanalysis.proxies.dynamic.plantsimulator import (
     Comment,
     ConnectionParser,
     Index,
@@ -48,7 +48,7 @@ from timeseriesanalysis.dynamic.plantsimulator import (
     SignalNamer,
     SignalType,
 )
-from timeseriesanalysis.dynamic.simulatablemodels import (
+from timeseriesanalysis.proxies.dynamic.simulatablemodels import (
     Divide,
     DivideParameters,
     GainSchedModel,
@@ -61,12 +61,12 @@ from timeseriesanalysis.dynamic.simulatablemodels import (
     UnitModel,
     UnitParameters,
 )
-from timeseriesanalysis.dynamic.timedelay import (
+from timeseriesanalysis.proxies.dynamic.timedelay import (
     ProcessTimeDelayIdentWarnings,
     TimeDelay,
     TimeDelaySamples,
 )
-from timeseriesanalysis.dynamic.unitdataset import ModelType, UnitDataSet
+from timeseriesanalysis.proxies.dynamic.unitdataset import ModelType, UnitDataSet
 
 __all__ = [
     "BadDataFinder",

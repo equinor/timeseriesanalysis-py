@@ -1,4 +1,4 @@
-from timeseriesanalysis.core import Array2D, Index, Matrix
+from timeseriesanalysis.proxies.core import Array2D, Index, Matrix
 
 
 class TestArray2D:
