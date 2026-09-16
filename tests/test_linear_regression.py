@@ -1,7 +1,7 @@
 import pytest
 
-from timeseriesanalysis.utilities import TimeSeriesCreator
-from timeseriesanalysis.core import Vec
+from timeseriesanalysis.proxies.utilities import TimeSeriesCreator
+from timeseriesanalysis.proxies.core import Vec
 from timeseriesanalysis.system_types import DoubleArray, DoubleMatrix
 
 class TestTimeSeriesDataSet:

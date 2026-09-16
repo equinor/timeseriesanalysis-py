@@ -1,6 +1,6 @@
 import pytest
 
-from timeseriesanalysis.core import CorrelationCalculator, SignalPeriodEstimator
+from timeseriesanalysis.proxies.core import CorrelationCalculator, SignalPeriodEstimator
 
 
 class TestCorrelationCalculator:

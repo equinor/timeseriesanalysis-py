@@ -124,7 +124,7 @@ def generate_stubs(
     Parameters
     ----------
     py_module_name:
-        Dotted Python module name, e.g. ``"timeseriesanalysis.core"``.
+        Dotted Python module name, e.g. ``"timeseriesanalysis.proxies.core"``.
     out_path:
         If given, the .pyi is written here.  Defaults to alongside the source.
     debug:

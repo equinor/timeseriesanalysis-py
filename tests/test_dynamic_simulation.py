@@ -1,15 +1,15 @@
 import pytest
 
-from timeseriesanalysis.dynamic import (
+from timeseriesanalysis.proxies.dynamic import (
     PidModel,
     PidParameters,
     SignalType,
     UnitModel,
     UnitParameters,
 )
-from timeseriesanalysis.core import TimeSeriesDataSet
-from timeseriesanalysis.dynamic.plantsimulator import PlantSimulator
-from timeseriesanalysis.utilities import TimeSeriesCreator
+from timeseriesanalysis.proxies.core import TimeSeriesDataSet
+from timeseriesanalysis.proxies.dynamic.plantsimulator import PlantSimulator
+from timeseriesanalysis.proxies.utilities import TimeSeriesCreator
 from timeseriesanalysis.system_types import DoubleArray, ModelList
 
 

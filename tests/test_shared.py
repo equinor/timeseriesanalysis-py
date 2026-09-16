@@ -1,4 +1,4 @@
-from timeseriesanalysis.core import Shared
+from timeseriesanalysis.proxies.core import Shared
 
 
 class TestShared:

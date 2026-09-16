@@ -1,6 +1,6 @@
 import pytest
 
-from timeseriesanalysis.filters import (
+from timeseriesanalysis.proxies.filters import (
     BandPass,
     HighPass,
     LowPass,
