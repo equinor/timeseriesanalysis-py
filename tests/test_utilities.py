@@ -6,7 +6,7 @@ from timeseriesanalysis.proxies.utilities import (
     Plot4Test,
     SignificantDigits,
     TimeSeriesCreator,
-    UnixTime
+    UnixTime,
 )
 
 

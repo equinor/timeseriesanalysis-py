@@ -13,9 +13,9 @@ import importlib
 from pathlib import Path
 from typing import Any
 
+from cli.class_discovery import HAND_AUTHORED_MODULE_NAMES
 from timeseriesanalysis._runtime import Runtime
 from timeseriesanalysis.dotnet_proxy import DotNetProxy, DotNetStaticProxy
-from cli.class_discovery import HAND_AUTHORED_MODULE_NAMES
 
 # Mapping from .NET type full names to Python type annotation strings.
 DOTNET_TO_PYTHON: dict[str, str] = {
@@ -57,7 +57,7 @@ def _method_stub(m: Any) -> str:
     try:
         for p in m.GetParameters():
             params.append(f"{p.Name}: {map_type(p.ParameterType)}")
-    except Exception:
+    except Exception:  # noqa: BLE001 - pythonnet reflection errors are not consistently typed
         params.append("*args: object")
     return f"    def {m.Name}({', '.join(params)}) -> {map_type(m.ReturnType)}: ..."
 
@@ -90,7 +90,7 @@ def _class_stub(t: Any, System: Any, *, debug: bool = False) -> str:
     for prop in t.GetProperties(binding):
         try:
             lines.append(_property_stub(prop))
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 - pythonnet reflection errors are not consistently typed'
             if debug:
                 print(f"  [warn] property {prop.Name}: {e}")
             lines.append(f"    {prop.Name}: object")
@@ -100,7 +100,7 @@ def _class_stub(t: Any, System: Any, *, debug: bool = False) -> str:
             continue
         try:
             lines.append(_method_stub(method))
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 - pythonnet reflection errors are not consistently typed
             if debug:
                 print(f"  [warn] method {method.Name}: {e}")
             lines.append(f"    def {method.Name}(self, *args: object) -> object: ...")

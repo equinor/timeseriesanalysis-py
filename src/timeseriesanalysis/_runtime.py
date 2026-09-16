@@ -52,7 +52,7 @@ class Runtime:
                 "  https://dotnet.microsoft.com/download"
             ) from e
 
-        import clr  # noqa: E402
+        import clr
 
         sys.path.append(str(assembly_dir))
         clr.AddReference(self.assembly_name)

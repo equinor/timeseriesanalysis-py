@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Fetch and publish a specified TimeSeriesAnalysis release."""
 
 from __future__ import annotations
@@ -10,7 +9,6 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-
 
 REPOSITORY_URL = "https://github.com/equinor/TimeSeriesAnalysis.git"
 PROJECT_FILE_NAME = "TimeSeriesAnalysis.csproj"

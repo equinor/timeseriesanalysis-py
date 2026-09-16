@@ -1,8 +1,9 @@
 import pytest
 
-from timeseriesanalysis.proxies.utilities import TimeSeriesCreator
 from timeseriesanalysis.proxies.core import Vec
+from timeseriesanalysis.proxies.utilities import TimeSeriesCreator
 from timeseriesanalysis.system_types import DoubleArray, DoubleMatrix
+
 
 class TestTimeSeriesDataSet:
     def test_linear_regression(self) -> None:
