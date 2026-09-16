@@ -86,7 +86,7 @@ class DisturbanceIdResult(DotNetProxy):
 
     _dotnet_module = _MODULE
 
-
+ 
 class BadIndicesHandlingEnum(DotNetProxy):
     """Enumeration for handling bad indices in time-series data."""
 

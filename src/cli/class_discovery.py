@@ -18,6 +18,7 @@ from __future__ import annotations
 import importlib
 from typing import Any
 
+from timeseriesanalysis._runtime import Runtime
 from timeseriesanalysis.dotnet_proxy import DotNetProxy, DotNetStaticProxy
 
 # .NET namespaces that this package covers, mapped to their Python module path.
@@ -29,6 +30,22 @@ NAMESPACE_MAP: dict[str, str] = {
     "TimeSeriesAnalysis.Dynamic": "TimeSeriesAnalysis.Dynamic",
     "TimeSeriesAnalysis.Utility": "TimeSeriesAnalysis.Utility",
 }
+
+# All hand-authored leaf modules that contain proxy classes.
+HAND_AUTHORED_MODULE_NAMES = [
+    "timeseriesanalysis.core",
+    "timeseriesanalysis.utilities",
+    "timeseriesanalysis.filters.filters",
+    "timeseriesanalysis.dynamic.commondatapreprocessing",
+    "timeseriesanalysis.dynamic.gainscheduling",
+    "timeseriesanalysis.dynamic.identification",
+    "timeseriesanalysis.dynamic.interfaces",
+    "timeseriesanalysis.dynamic.pid",
+    "timeseriesanalysis.dynamic.plantsimulator",
+    "timeseriesanalysis.dynamic.simulatablemodels",
+    "timeseriesanalysis.dynamic.timedelay",
+    "timeseriesanalysis.dynamic.unitdataset",
+]
 
 
 def _is_static_class(t: Any) -> bool:
@@ -114,3 +131,53 @@ def diff_proxies(
         "added": sorted(set(reflected) - set(known)),
         "removed": sorted(set(known) - set(reflected)),
     }
+
+
+def _collect_hand_authored() -> dict[str, type]:
+    _base_classes = (DotNetProxy, DotNetStaticProxy)
+    hand_authored: dict[str, type] = {}
+    for module_name in HAND_AUTHORED_MODULE_NAMES:
+        module = importlib.import_module(module_name)
+        for name, obj in vars(module).items():
+            if (
+                isinstance(obj, type)
+                and issubclass(obj, _base_classes)
+                and obj not in _base_classes
+            ):
+                hand_authored[name] = obj
+    return hand_authored
+
+
+def discover_classes() -> int:
+    """Report proxy types that have drifted from the loaded DLL."""
+    Runtime().initialize()
+    report = diff_proxies("TimeSeriesAnalysis", _collect_hand_authored())
+
+    has_added = bool(report["added"])
+    has_removed = bool(report["removed"])
+
+    if has_added:
+        print("NEW types in DLL (not yet proxied):")
+        for name in report["added"]:
+            print(f"  + {name}")
+    else:
+        print("No new types.")
+
+    print()
+
+    if has_removed:
+        print("REMOVED types (proxied but no longer in DLL):")
+        for name in report["removed"]:
+            print(f"  - {name}")
+    else:
+        print("No removed types.")
+
+    return 0 if not has_added and not has_removed else 1
+
+
+def main() -> None:
+    raise SystemExit(discover_classes())
+
+
+if __name__ == "__main__":
+    main()

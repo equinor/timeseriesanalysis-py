@@ -14,7 +14,7 @@ wheels/
 .env
 
 # .NET assemblies
-_assemblies/
+**/_assemblies/
 *.dll
 *.pdb
 *.exe
