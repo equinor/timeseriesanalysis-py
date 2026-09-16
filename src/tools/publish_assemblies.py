@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Fetch and publish a specified TimeSeriesAnalysis release."""
 
+from __future__ import annotations
+
 import argparse
 import shutil
 import subprocess
@@ -11,14 +13,14 @@ from pathlib import Path
 
 REPOSITORY_URL = "https://github.com/equinor/TimeSeriesAnalysis.git"
 PROJECT_FILE_NAME = "TimeSeriesAnalysis.csproj"
-OUTPUT_DIRECTORY_NAME = "_assemblies_auto"
+OUTPUT_DIRECTORY_NAME = "_assemblies"
 
 
-def run(command: list[str], *, cwd: Path | None = None) -> None:
+def _run(command: list[str], *, cwd: Path | None = None) -> None:
     subprocess.run(command, cwd=cwd, check=True)
 
 
-def copy_directory_contents(source: Path, target: Path) -> None:
+def _copy_directory_contents(source: Path, target: Path) -> None:
     for item in source.iterdir():
         target_path = target / item.name
         if item.is_dir():
@@ -26,11 +28,9 @@ def copy_directory_contents(source: Path, target: Path) -> None:
         else:
             shutil.copy2(item, target_path)
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("version_tag", help="Git tag to clone and publish, for example v1.0.0")
-    arguments = parser.parse_args()
 
+def publish_assemblies(version_tag: str) -> int:
+    """Publish the specified upstream release into the project assembly directory."""
     if shutil.which("git") is None:
         print("git is required but was not found on PATH.", file=sys.stderr)
         return 1
@@ -38,8 +38,9 @@ def main() -> int:
         print("dotnet is required but was not found on PATH.", file=sys.stderr)
         return 1
 
-    project_root = Path(__file__).resolve().parent.parent
-    output_directory = project_root / OUTPUT_DIRECTORY_NAME
+    source_directory = Path(__file__).resolve().parent.parent
+    project_directory = source_directory.parent
+    output_directory = project_directory / OUTPUT_DIRECTORY_NAME
     if output_directory.exists():
         print(
             f"Refusing to overwrite existing output directory: {output_directory}",
@@ -48,17 +49,17 @@ def main() -> int:
         return 1
 
     try:
-        print(f"Downloading TimeSeriesAnalysis {arguments.version_tag}.")
+        print(f"Downloading TimeSeriesAnalysis {version_tag}.")
         with tempfile.TemporaryDirectory(prefix="timeseriesanalysis-") as temporary_directory:
             source_directory = Path(temporary_directory) / "TimeSeriesAnalysis"
-            run(
+            _run(
                 [
                     "git",
                     "clone",
                     "--depth",
                     "1",
                     "--branch",
-                    arguments.version_tag,
+                    version_tag,
                     REPOSITORY_URL,
                     str(source_directory),
                 ]
@@ -69,7 +70,7 @@ def main() -> int:
                 raise RuntimeError(f"Expected project file was not found: {project_file}")
 
             staging_directory = Path(temporary_directory) / "Staging"
-            run(
+            _run(
                 [
                     "dotnet",
                     "publish",
@@ -81,8 +82,13 @@ def main() -> int:
                 ]
             )
 
-            output_directory.mkdir(exist_ok=True)
-            copy_directory_contents(staging_directory, output_directory)
+            output_directory.mkdir()
+            try:
+                _copy_directory_contents(staging_directory, output_directory)
+            except OSError as error:
+                print(f"Failed to copy contents to output directory: {error}", file=sys.stderr)
+                shutil.rmtree(output_directory, ignore_errors=True)
+                return 1
 
     except (OSError, subprocess.CalledProcessError, RuntimeError) as error:
         print(f"Failed to publish TimeSeriesAnalysis: {error}", file=sys.stderr)
@@ -92,5 +98,12 @@ def main() -> int:
     return 0
 
 
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("version_tag", help="Git tag to clone and publish, for example v1.0.0")
+    arguments = parser.parse_args()
+    raise SystemExit(publish_assemblies(arguments.version_tag))
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()

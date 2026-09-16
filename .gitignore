@@ -15,6 +15,7 @@ wheels/
 
 # .NET assemblies
 _assemblies/
+_assemblies*
 *.dll
 *.pdb
 *.exe
