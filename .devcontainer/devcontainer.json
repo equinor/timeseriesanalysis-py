@@ -1,0 +1,28 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+	"name": "timeseriesanalysis Python SDK",
+	
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"UV_VARIANT": "0.12.15",
+			"PYTHON_VERSION": "dev-3.13-trixie",
+			"DOTNET_SDK_VERSION": "8.0-jammy"
+		}
+	},
+
+	"postCreateCommand": "uv sync --locked --all-groups",
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"charliermarsh.ruff"
+			],
+			"settings": {
+				"python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+			}
+		}
+	}
+}

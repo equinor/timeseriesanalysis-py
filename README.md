@@ -4,50 +4,68 @@ Python bindings for [TimeSeriesAnalysis](https://github.com/equinor/TimeSeriesAn
 
 > **Note:** This SDK is under active development.
 
-## Prerequisites
+## Usage
 
-### Python
+The package is not yet published on PyPI. Clone it, publish the required .NET assemblies, and add the clone to your Python project as an editable dependency.
 
-This project requires **Python 3.13** and uses [uv](https://docs.astral.sh/uv/) for dependency management and virtual environments.
+```bash
+git clone https://github.com/equinor/timeseriesanalysis-py.git
+cd timeseriesanalysis-py
+uv sync
+uv run publish-assemblies vX.Y.Z
 
-### .NET Runtime
+# In your Python project
+uv add --editable /path/to/timeseriesanalysis-py
+```
 
-This package requires the [.NET SDK](https://dotnet.microsoft.com/download), including the runtime (CoreCLR), to be installed on your system. Follow the official instructions for your OS.
+The package requires the [.NET SDK](https://dotnet.microsoft.com/download), including the CoreCLR runtime. For the complete setup, use one of the development options below.
 
-Verify the installation:
+The package exposes public `TimeSeriesAnalysis` .NET types as Python proxy classes. See the [TimeSeriesAnalysis API documentation](https://equinor.github.io/TimeSeriesAnalysis/api/TimeSeriesAnalysis.html) for the complete API.
+
+```python
+from timeseriesanalysis import Vec
+
+vec = Vec()
+result = vec.Add([1.0, 2.0, 3.0], [4.0, 5.0, 6.0])
+# list(result) => [5.0, 7.0, 9.0]
+```
+
+## Development
+
+### Codespaces in the browser
+
+Open the repository in a GitHub Codespace. The Dev Container installs Python, `uv`, and the .NET SDK, then installs Python dependencies. Publish the assemblies before running the package or its tests:
+
+```bash
+uv run publish-assemblies vX.Y.Z
+```
+
+### Local Dev Container
+
+Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) and the VS Code [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers). Open this repository in VS Code, then run **Dev Containers: Reopen in Container**. The container installs the Python dependencies automatically.
+
+Publish the assemblies before running the package or its tests:
+
+```bash
+uv run publish-assemblies vX.Y.Z
+```
+
+### Local development
+
+Install Python 3.13, [uv](https://docs.astral.sh/uv/), Git, and the [.NET SDK](https://dotnet.microsoft.com/download). Confirm the .NET runtime is available:
 
 ```bash
 dotnet --list-runtimes
 ```
 
-### .NET Assemblies
-
-The `TimeSeriesAnalysis` assemblies must be made available in the project. Run the `publish-assemblies` helper script with a revision argument to automatically fetch and make them available.
-
-```bash
-# Using v1.2.34 as example package revision
-uv run publish-assemblies v1.2.34
-```
-
-> **Note:** Alternatively, download them manually and place them in a top-level `_assemblies` directory, and set the `TIMESERIESANALYSIS_ASSEMBLY_PATH` environment variable to the directory containing the DLLs.
-
-## Installation
+Create the environment and publish the assemblies:
 
 ```bash
 uv sync
+uv run publish-assemblies vX.Y.Z
 ```
 
-## Usage
-
-The package exposes all public types from the `TimeSeriesAnalysis` .NET library as Python proxy classes. For the full API reference, see the [TimeSeriesAnalysis API documentation](https://equinor.github.io/TimeSeriesAnalysis/api/TimeSeriesAnalysis.html).
-
-```python
-from timeseriesanalysis import Vec, LowPass, TimeSeries
-
-vec = Vec()
-result = vec.Add([1.0, 2.0, 3.0], [4.0, 5.0, 6.0])
-# result: [5.0, 7.0, 9.0]
-```
+Alternatively, provide compatible assemblies in a top-level `_assemblies` directory and set `TIMESERIESANALYSIS_ASSEMBLY_PATH` to the directory containing the DLLs.
 
 ## Developer CLI
 
@@ -87,6 +105,14 @@ publish-assemblies vX.Y.Z
 ```
 
 ---
+
+## Testing
+
+After publishing the assemblies, run the test suite with:
+
+```bash
+uv run pytest
+```
 
 ## Demo
 

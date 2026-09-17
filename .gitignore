@@ -21,6 +21,3 @@ wheels/
 *.nupkg
 *.deps.json
 *.runtimeconfig.json
-
-# IDE
-.vscode/
