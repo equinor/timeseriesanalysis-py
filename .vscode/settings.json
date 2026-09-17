@@ -1,7 +1,6 @@
 {
   "python.languageServer": "Pylance",
   "python.analysis.autoImportCompletions": true,
-  "python.analysis.importFormat": "relative",
   "python.analysis.diagnosticMode": "openFilesOnly",
   "python.testing.pytestArgs": [
     "tests"
