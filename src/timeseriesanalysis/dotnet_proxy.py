@@ -62,7 +62,10 @@ class DotNetStaticProxy:
         if callable(attr):
 
             def _wrapper(*args: Any, **kwargs: Any) -> Any:
-                return attr(*tuple(_unwrap(arg) for arg in args), **kwargs)
+                return attr(
+                    *tuple(_unwrap(arg) for arg in args),
+                    **{name: _unwrap(value) for name, value in kwargs.items()},
+                )
 
             return _wrapper
         return attr
