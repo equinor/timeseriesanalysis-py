@@ -45,7 +45,7 @@ class GainSchedIdentWarnings(DotNetStaticProxy):
     _dotnet_module = _MODULE
 
 
-class GainSchedIdentifier(DotNetProxy):
+class GainSchedIdentifier(DotNetStaticProxy):
     """Identifies a gain-scheduled model from time-series data."""
 
     _dotnet_module = _MODULE
@@ -63,7 +63,7 @@ class PidIdentWarning(DotNetStaticProxy):
     _dotnet_module = _MODULE
 
 
-class UnitIdentifier(DotNetProxy):
+class UnitIdentifier(DotNetStaticProxy):
     """Identifies the default dynamic process model from time-series data."""
 
     _dotnet_module = _MODULE

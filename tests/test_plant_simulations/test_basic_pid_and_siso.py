@@ -20,7 +20,6 @@ from timeseriesanalysis.proxies.utilities import TimeSeriesCreator
 from timeseriesanalysis.system_types import (
     DateTimeList,
     DoubleArray,
-    DoubleMatrix,
     IntList,
     ModelList,
 )
@@ -461,7 +460,7 @@ class TestBasicPidAndSiso:
 
         input_values = [0.0] * 31 + [1.0] * 30
         data_set = UnitDataSet()
-        data_set.U = DoubleMatrix([DoubleArray([value]) for value in input_values])
+        data_set.SetU(DoubleArray(input_values))
         data_set.CreateTimeStamps(1)
 
         result = PlantSimulatorHelper().SimulateSingle(data_set, model)
