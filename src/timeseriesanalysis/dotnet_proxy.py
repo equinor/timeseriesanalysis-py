@@ -36,7 +36,7 @@ class DotNetProxy:
         if callable(attr):
 
             def _wrapper(*args: Any, **kwargs: Any) -> Any:
-                return attr(*tuple(_unwrap(a) for a in args), **kwargs)
+                return attr(*tuple(_unwrap(arg) for arg in args), **kwargs)
 
             return _wrapper
         return attr
@@ -58,7 +58,17 @@ class DotNetStaticProxy:
         self._inner = getattr(module, self._dotnet_class)
 
     def __getattr__(self, name: str) -> Any:
-        return getattr(self._inner, name)
+        attr = getattr(self._inner, name)
+        if callable(attr):
+
+            def _wrapper(*args: Any, **kwargs: Any) -> Any:
+                return attr(
+                    *tuple(_unwrap(arg) for arg in args),
+                    **{name: _unwrap(value) for name, value in kwargs.items()},
+                )
+
+            return _wrapper
+        return attr
 
     def __class_getitem__(cls, item: Any) -> Any:
         return cls._inner[item]

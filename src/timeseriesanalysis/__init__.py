@@ -207,6 +207,6 @@ def main() -> None:
 
     a = [1.0, 2.0, 3.0]
     b = [4.0, 5.0, 6.0]
-    result = vec.Add(a, b)
+    result = list(vec.Add(a, b))
 
     print(f"vec.add({a}, {b}) = {result}")

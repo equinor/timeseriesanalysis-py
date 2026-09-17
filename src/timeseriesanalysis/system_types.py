@@ -34,6 +34,30 @@ class DoubleMatrix:
         return matrix
 
 
+class IntList:
+    """Constructs a .NET List[Int32] from a Python sequence."""
+
+    def __new__(cls, values: Any) -> Any:
+        GenericCollections = importlib.import_module("System.Collections.Generic")
+        System = importlib.import_module("System")
+        result = GenericCollections.List[System.Int32]()
+        for value in values:
+            result.Add(value)
+        return result
+
+
+class DateTimeList:
+    """Constructs a .NET List[DateTime] from a Python sequence."""
+
+    def __new__(cls, values: Any) -> Any:
+        GenericCollections = importlib.import_module("System.Collections.Generic")
+        System = importlib.import_module("System")
+        result = GenericCollections.List[System.DateTime]()
+        for value in values:
+            result.Add(value)
+        return result
+
+
 class ModelList:
     """Constructs a .NET List<ISimulatableModel> from a sequence of model proxy objects."""
 
