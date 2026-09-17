@@ -88,20 +88,32 @@ NEW types in DLL (not yet proxied):
 No removed types.
 ```
 
-### `.pyi` stub generation
-
-Generates `.pyi` type stub files alongside every hand-authored proxy module source file, derived from .NET reflection.
-
-```bash
-generate-type-stubs
-```
-
 ### Publish assemblies
 
 Downloads the specified `TimeSeriesAnalysis` release, publishes its .NET project, and copies the resulting assembly files into the package. The command requires `git` and the .NET SDK on `PATH`, and refuses to overwrite an existing `_assemblies` directory.
 
 ```bash
 publish-assemblies vX.Y.Z
+```
+
+### Generate missing python test implementations
+
+Compares the NUnit tests in an upstream revision with the collected pytest tests and writes the sorted names of upstream tests without a Python counterpart. The report defaults to `reports/missing_tests.txt`; use `--output` to write it elsewhere.
+
+```bash
+generate-upstream-test-manifest vX.Y.Z
+generate-upstream-test-manifest vX.Y.Z --output reports/missing_tests.txt
+```
+
+### ~~`.pyi` stub generation~~
+
+[!NOTE]
+Currently not in use
+
+Generates `.pyi` type stub files alongside every hand-authored proxy module source file, derived from .NET reflection.
+
+```bash
+generate-type-stubs
 ```
 
 ---
