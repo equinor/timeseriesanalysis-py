@@ -19,18 +19,17 @@ class TestTimeSeriesDataSet:
         u2 = tsc.Step(31, 61, 1, 2)
         u3 = tsc.Step(21, 61, 1, -1)
 
-        y = []
         noise = vec.Multiply(vec.Rand(u1.Length, -1, 1, 0), noise_amplitude)
-        for k in range(u1.Length):
-            y.append(
+        y = DoubleArray(
+            [
                 true_gains[0] * u1[k]
                 + true_gains[1] * u2[k]
                 + true_gains[2] * u3[k]
                 + true_bias
                 + noise[k]
-            )
-
-        y = DoubleArray(y)
+                for k in range(u1.Length)
+            ]
+        )
         U = DoubleMatrix([u1, u2, u3])
         results = vec.Regress(y, U)
 

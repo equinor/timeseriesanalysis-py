@@ -2,16 +2,20 @@ import importlib
 from typing import Any
 
 
+def _create_list(item_type: Any, values: Any) -> Any:
+    collections = importlib.import_module("System.Collections.Generic")
+    result = collections.List[item_type]()
+    for value in values:
+        result.Add(value)
+    return result
+
+
 class DoubleArray:
     """Constructs a .NET Double[] from a Python sequence."""
 
     def __new__(cls, values: Any) -> Any:
-        System = importlib.import_module("System")
-        Double = System.Double
-        arr = System.Array.CreateInstance(Double, len(values))
-        for i, v in enumerate(values):
-            arr[i] = v
-        return arr
+        system = importlib.import_module("System")
+        return system.Array[system.Double](values)
 
 
 class DoubleMatrix:
@@ -22,49 +26,47 @@ class DoubleMatrix:
     """
 
     def __new__(cls, arrays: Any) -> Any:
-        System = importlib.import_module("System")
-        Double = System.Double
+        system = importlib.import_module("System")
 
         rows = len(arrays)
         cols = arrays[0].Length
-        matrix = System.Array.CreateInstance(Double, rows, cols)
+        matrix = system.Array.CreateInstance(system.Double, rows, cols)
         for i, row in enumerate(arrays):
             for j in range(cols):
                 matrix[i, j] = row[j]
         return matrix
 
 
+class DoubleArrayList:
+    """Constructs a .NET List[Double[]] from a sequence of .NET double arrays."""
+
+    def __new__(cls, values: Any) -> Any:
+        system = importlib.import_module("System")
+        return _create_list(system.Array[system.Double], values)
+
+
 class IntList:
     """Constructs a .NET List[Int32] from a Python sequence."""
 
     def __new__(cls, values: Any) -> Any:
-        GenericCollections = importlib.import_module("System.Collections.Generic")
-        System = importlib.import_module("System")
-        result = GenericCollections.List[System.Int32]()
-        for value in values:
-            result.Add(value)
-        return result
+        system = importlib.import_module("System")
+        return _create_list(system.Int32, values)
 
 
 class DateTimeList:
     """Constructs a .NET List[DateTime] from a Python sequence."""
 
     def __new__(cls, values: Any) -> Any:
-        GenericCollections = importlib.import_module("System.Collections.Generic")
-        System = importlib.import_module("System")
-        result = GenericCollections.List[System.DateTime]()
-        for value in values:
-            result.Add(value)
-        return result
+        system = importlib.import_module("System")
+        return _create_list(system.DateTime, values)
 
 
 class ModelList:
     """Constructs a .NET List<ISimulatableModel> from a sequence of model proxy objects."""
 
     def __new__(cls, models: Any) -> Any:
-        GenericCollections = importlib.import_module("System.Collections.Generic")
-        Dynamic = importlib.import_module("TimeSeriesAnalysis.Dynamic")
-        lst = GenericCollections.List[Dynamic.ISimulatableModel]()
-        for m in models:
-            lst.Add(m._inner if hasattr(m, "_inner") else m)
-        return lst
+        dynamic = importlib.import_module("TimeSeriesAnalysis.Dynamic")
+        return _create_list(
+            dynamic.ISimulatableModel,
+            (model._inner if hasattr(model, "_inner") else model for model in models),
+        )
