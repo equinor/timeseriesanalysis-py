@@ -11,8 +11,8 @@ class Array2D(DotNetStaticProxy):
     _dotnet_class = "Array2D"
 
 
-class Array2DExtensionMethods(DotNetProxy):
-    """Provides access to the .NET TimeSeriesAnalysis.Array2DExtensionMethods filter."""
+class Array2DExtensionMethods(DotNetStaticProxy):
+    """Provides access to .NET Array2D extension methods for concrete array types."""
 
     _dotnet_module = _MODULE
     _dotnet_class = "Array2DExtensionMethods"
@@ -26,8 +26,15 @@ class Vec(DotNetProxy):
     _dotnet_class = "Vec"
 
 
-class VecExtensionMethods(DotNetProxy):
-    """Provides access to the .NET TimeSeriesAnalysis.VecExtensionMethods, delegating all attribute access."""
+class VecStatic(DotNetStaticProxy):
+    """Provides access to .NET TimeSeriesAnalysis.Vec static methods."""
+
+    _dotnet_module = _MODULE
+    _dotnet_class = "Vec"
+
+
+class VecExtensionMethods(DotNetStaticProxy):
+    """Provides access to .NET Vec extension methods for concrete vector types."""
 
     _dotnet_module = _MODULE
     _dotnet_class = "VecExtensionMethods"
@@ -111,13 +118,13 @@ class RegressionWarnings(DotNetStaticProxy):
     _dotnet_module = _MODULE
 
 
-class VectorFindValueType(DotNetProxy):
+class VectorFindValueType(DotNetStaticProxy):
     """Provides access to the .NET TimeSeriesAnalysis.VectorFindValueType enum."""
 
     _dotnet_module = _MODULE
 
 
-class VectorSortType(DotNetProxy):
+class VectorSortType(DotNetStaticProxy):
     """Provides access to the .NET TimeSeriesAnalysis.VectorSortType enum."""
 
     _dotnet_module = _MODULE
