@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import shutil
 import subprocess
@@ -10,13 +11,17 @@ import sys
 import tempfile
 from pathlib import Path
 
-REPOSITORY_URL = "https://github.com/equinor/TimeSeriesAnalysis.git"
-PROJECT_FILE_NAME = "TimeSeriesAnalysis.csproj"
+from cli.common import (
+    PROJECT_FILE_NAME,
+    REPOSITORY_NAME,
+    REPOSITORY_OWNER,
+    REPOSITORY_URL,
+    _run,
+    checkout_repository,
+)
+
 OUTPUT_DIRECTORY_NAME = "_assemblies"
-
-
-def _run(command: list[str], *, cwd: Path | None = None) -> None:
-    subprocess.run(command, cwd=cwd, check=True)
+ARTIFACTS_FILE = "upstream_artifacts.json"
 
 
 def _copy_directory_contents(source: Path, target: Path) -> None:
@@ -53,34 +58,14 @@ def publish_assemblies(revision: str) -> int:
             prefix="timeseriesanalysis-"
         ) as temporary_directory:
             source_directory = Path(temporary_directory) / "TimeSeriesAnalysis"
-            _run(
-                [
-                    "git",
-                    "init",
-                    str(source_directory),
-                ]
+            checkout_repository(
+                REPOSITORY_URL,
+                PROJECT_FILE_NAME,
+                source_directory,
+                revision,
             )
-            _run(
-                ["git", "remote", "add", "origin", REPOSITORY_URL], cwd=source_directory
-            )
-            _run(
-                [
-                    "git",
-                    "fetch",
-                    "--depth",
-                    "1",
-                    "origin",
-                    revision,
-                ],
-                cwd=source_directory,
-            )
-            _run(["git", "checkout", "--detach", "FETCH_HEAD"], cwd=source_directory)
 
             project_file = source_directory / PROJECT_FILE_NAME
-            if not project_file.is_file():
-                raise RuntimeError(
-                    f"Expected project file was not found: {project_file}"
-                )
 
             staging_directory = Path(temporary_directory) / "Staging"
             _run(
@@ -94,6 +79,23 @@ def publish_assemblies(revision: str) -> int:
                     str(staging_directory),
                 ]
             )
+
+            commit_hash = _run(
+                ["git", "rev-parse", "HEAD"], cwd=source_directory
+            ).strip()
+
+            with open(staging_directory / ARTIFACTS_FILE, "w") as file:
+                json.dump(
+                    {
+                        "repository_url": REPOSITORY_URL,
+                        "owner": REPOSITORY_OWNER,
+                        "repository": REPOSITORY_NAME,
+                        "revision": revision,
+                        "commit_hash": commit_hash,
+                        "assembly": "TimeSeriesAnalysis.dll",
+                    },
+                    file,
+                )
 
             output_directory.mkdir()
             try:

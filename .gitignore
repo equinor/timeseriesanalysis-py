@@ -13,6 +13,13 @@ wheels/
 # Environment variables
 .env
 
+# macOS Finder metadata
+.DS_Store
+
+# Generated test reports
+reports/
+*missing_tests.txt
+
 # .NET assemblies
 **/_assemblies/
 *.dll
