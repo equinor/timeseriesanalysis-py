@@ -6,7 +6,7 @@ from timeseriesanalysis.system_types import DoubleArray, DoubleMatrix
 
 
 class TestTimeSeriesDataSet:
-    def test_linear_regression(self) -> None:
+    def test_regress_gives_correct_value(self) -> None:
 
         tsc = TimeSeriesCreator()
         vec = Vec()

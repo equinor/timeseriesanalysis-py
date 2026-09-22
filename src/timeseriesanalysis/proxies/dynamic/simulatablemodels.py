@@ -33,8 +33,8 @@ class PidModel(DotNetProxy):
     _dotnet_module = _MODULE
 
 
-class PidModelInputsIdx(DotNetProxy):
-    """Simulatable industrial PID-controller, wraps PidController and implements ISimulatableModel."""
+class PidModelInputsIdx(DotNetStaticProxy):
+    """Input indexes accepted by a simulated PID controller."""
 
     _dotnet_module = _MODULE
 

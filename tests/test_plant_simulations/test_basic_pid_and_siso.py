@@ -308,7 +308,7 @@ class TestBasicPidAndSiso:
         assert simulated_y[-1] == pytest.approx(60.0 * 1.1 + 5.0, abs=0.01)
 
     @pytest.mark.parametrize("bad_index_count", [1, 3])
-    def test_serial2_siso_ignores_bad_data_points_and_converges(
+    def test_serial2_siso_ignores_bad_data_points_runs_restarts_simulator_and_converges(
         self,
         bad_index_count: int,
     ) -> None:
@@ -368,7 +368,7 @@ class TestBasicPidAndSiso:
             (60.0 * 1.1 + 5.0) * 1.1 + 5.0, abs=0.01
         )
 
-    def test_basic_pid_setpoint_step_simulate_matches_simulate_single(
+    def test_basic_pid_setpoint_step_compare_simulate_and_simulate_single_must_give_same_result_for_disturbance_est_to_work(
         self,
         create_basic_pid_system,
     ) -> None:
@@ -408,7 +408,7 @@ class TestBasicPidAndSiso:
         ) / sum(abs(value) for value in single_u)
         assert relative_error < 0.001 / 100
 
-    def test_basic_pid_setpoint_step_with_noise_and_filtering_runs(
+    def test_basic_pid_setpoint_step_with_noise_and_filtering_filtering_works(
         self,
         create_basic_pid_system,
     ) -> None:
@@ -440,7 +440,7 @@ class TestBasicPidAndSiso:
         "sample_count,time_base_s,flatline_periods,flatline_proportion",
         [(100, 1.0, 1, 0.05)],
     )
-    def test_basic_pid_with_flatlines_simulation_restart_is_bumpless(
+    def test_basic_pid_w_flatlines_co_simulate_sim_restart_is_bumpless(
         self,
         sample_count: int,
         time_base_s: float,
@@ -472,7 +472,7 @@ class TestBasicPidAndSiso:
         assert simulated_y[31 + time_delay_s] == pytest.approx(1.0)
 
     @pytest.mark.parametrize("indices_to_ignore", [[5, 15, 25]])
-    def test_variable_time_step_unit_model_skips_bad_indices(
+    def test_variable_time_step_simulations_unit_model_skips_over_bad_indices(
         self,
         indices_to_ignore: list[int],
     ) -> None:
@@ -511,7 +511,7 @@ class TestBasicPidAndSiso:
         assert is_ok_variable
 
     @pytest.mark.parametrize("indices_to_ignore", [[4]])
-    def test_variable_time_step_pid_skips_bad_indices(
+    def test_variable_time_step_simulations_pid_skips_over_bad_indices(
         self,
         create_basic_pid_system,
         indices_to_ignore: list[int],

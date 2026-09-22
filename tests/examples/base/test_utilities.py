@@ -136,19 +136,19 @@ class TestSignificantDigits:
     def setup_method(self) -> None:
         self.sd = SignificantDigits()
 
-    def test_format_scalar_2_digits(self) -> None:
+    def test_format_correct_digits(self) -> None:
         result = self.sd.Format(1234.0, 2)
         assert float(result) == pytest.approx(1200.0)
 
-    def test_format_scalar_3_digits(self) -> None:
+    def test_format_correct_digits_scalar_3_digits(self) -> None:
         result = self.sd.Format(9876.5, 3)
         assert float(result) == pytest.approx(9880.0)
 
-    def test_format_small_number(self) -> None:
+    def test_format_correct_digits_small_number(self) -> None:
         result = self.sd.Format(0.00456, 2)
         assert float(result) == pytest.approx(0.0046, rel=0.01)
 
-    def test_format_array(self) -> None:
+    def test_format_correct_digits_array(self) -> None:
         result = self.sd.Format([1234.0, 5678.0], 2)
         assert float(result[0]) == pytest.approx(1200.0)
         assert float(result[1]) == pytest.approx(5700.0)
@@ -178,7 +178,7 @@ class TestCSV:
         assert bool(ok) is True
         assert float(value) == pytest.approx(3.14)
 
-    def test_robust_parse_double_comma_separator(self) -> None:
+    def test_robust_parse_double_parses_commas(self) -> None:
         csv = CSV()
         ok, value = csv.RobustParseDouble("3,14")
         assert bool(ok) is True

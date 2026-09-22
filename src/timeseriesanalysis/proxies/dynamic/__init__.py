@@ -5,6 +5,7 @@ from timeseriesanalysis.proxies.dynamic.commondatapreprocessing import (
 )
 from timeseriesanalysis.proxies.dynamic.gainscheduling import GainSchedWarnings
 from timeseriesanalysis.proxies.dynamic.identification import (
+    BadIndicesHandlingEnum,
     ClosedLoopUnitIdentifier,
     DisturbanceCalculator,
     DisturbanceEstimationError,
@@ -70,6 +71,7 @@ from timeseriesanalysis.proxies.dynamic.unitdataset import ModelType, UnitDataSe
 
 __all__ = [
     "BadDataFinder",
+    "BadIndicesHandlingEnum",
     "ClosedLoopUnitIdentifier",
     "Comment",
     "CommonDataPreprocessor",

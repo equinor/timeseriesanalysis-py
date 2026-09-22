@@ -271,7 +271,9 @@ class TestLargerSystemSimulations:
 
         assert is_ok
 
-    def test_computational_loop_with_one_upstream_model_runs(self) -> None:
+    def test_computational_loop_two_models_loop_one_upstream_runs_and_converges(
+        self,
+    ) -> None:
         first_process, second_process, third_process, _ = _create_processes()
         simulator = PlantSimulator(
             ModelList([first_process, second_process, third_process])
@@ -308,7 +310,9 @@ class TestLargerSystemSimulations:
 
         assert is_ok
 
-    def test_computational_loop_with_upstream_and_downstream_models_runs(self) -> None:
+    def test_computational_loop_two_models_loop_one_upstream_one_downstream_runs_and_converges(
+        self,
+    ) -> None:
         first_process, second_process, third_process, fourth_process = (
             _create_processes()
         )
@@ -362,7 +366,7 @@ class TestLargerSystemSimulations:
 
         assert is_ok
 
-    def test_computational_loop_three_models_runs_and_converges(self) -> None:
+    def test_computational_loop_three_models_loop_runs_and_converges(self) -> None:
         first_process, second_process, _, fourth_process = _create_processes()
         simulator = PlantSimulator(
             ModelList([first_process, second_process, fourth_process])
