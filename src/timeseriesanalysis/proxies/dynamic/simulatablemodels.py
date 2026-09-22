@@ -1,4 +1,4 @@
-from timeseriesanalysis.dotnet_proxy import DotNetProxy
+from timeseriesanalysis.dotnet_proxy import DotNetProxy, DotNetStaticProxy
 
 _MODULE = "TimeSeriesAnalysis.Dynamic"
 
@@ -51,7 +51,7 @@ class Select(DotNetProxy):
     _dotnet_module = _MODULE
 
 
-class SelectType(DotNetProxy):
+class SelectType(DotNetStaticProxy):
     """Provides access to the .NET TimeSeriesAnalysis.Dynamic.SelectType enum."""
 
     _dotnet_module = _MODULE
