@@ -1,6 +1,6 @@
 [project]
 name = "timeseriesanalysis"
-version = "0.2.0"
+version = "0.3.0"
 description = "Python bindings for TimeSeriesAnalysis"
 readme = "README.md"
 authors = [

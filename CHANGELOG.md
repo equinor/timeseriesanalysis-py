@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0](https://github.com/equinor/timeseriesanalysis-py/compare/timeseriesanalysis-v0.2.0...timeseriesanalysis-v0.3.0) (2026-09-22)
+
+
+### Features
+
+* Add larger system tests ([#26](https://github.com/equinor/timeseriesanalysis-py/issues/26)) ([73a9d0c](https://github.com/equinor/timeseriesanalysis-py/commit/73a9d0ce312bdf43506c710e000483cf9bf49009))
+
+
+### Bug Fixes
+
+* Access the scalar value of the tagged package name in release-please config ([#28](https://github.com/equinor/timeseriesanalysis-py/issues/28)) ([6658ad6](https://github.com/equinor/timeseriesanalysis-py/commit/6658ad6e57b786498c5bf61d0b89703cc3b91fe4))
+
 ## [0.2.0](https://github.com/equinor/timeseriesanalysis-py/compare/timeseriesanalysis-v0.1.0...timeseriesanalysis-v0.2.0) (2026-09-22)
 
 
