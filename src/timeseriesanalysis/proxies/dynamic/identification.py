@@ -3,7 +3,7 @@ from timeseriesanalysis.dotnet_proxy import DotNetProxy, DotNetStaticProxy
 _MODULE = "TimeSeriesAnalysis.Dynamic"
 
 
-class ClosedLoopUnitIdentifier(DotNetProxy):
+class ClosedLoopUnitIdentifier(DotNetStaticProxy):
     """Identifies a unit model jointly with a disturbance signal under closed-loop control."""
 
     _dotnet_module = _MODULE

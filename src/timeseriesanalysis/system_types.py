@@ -18,6 +18,14 @@ class DoubleArray:
         return system.Array[system.Double](values)
 
 
+class StringArray:
+    """Constructs a .NET String[] from a Python sequence."""
+
+    def __new__(cls, values: Any) -> Any:
+        system = importlib.import_module("System")
+        return system.Array[system.String](values)
+
+
 class DoubleMatrix:
     """Constructs a .NET Double[,] rectangular array from a sequence of .NET double arrays.
 
