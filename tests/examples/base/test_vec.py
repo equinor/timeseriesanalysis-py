@@ -45,14 +45,14 @@ class TestDotNetVecMultiply:
 
 
 class TestDotNetVecStats:
-    def test_mean(self, vec: Vec) -> None:
+    def test_mean_is_ok(self, vec: Vec) -> None:
         result = vec.Mean([1.0, 2.0, 3.0])
         assert float(result) == pytest.approx(2.0)
 
-    def test_min(self, vec: Vec) -> None:
+    def test_vec_min(self, vec: Vec) -> None:
         assert float(vec.Min([3.0, 1.0, 2.0])) == pytest.approx(1.0)
 
-    def test_max(self, vec: Vec) -> None:
+    def test_vec_max(self, vec: Vec) -> None:
         assert float(vec.Max([3.0, 1.0, 2.0])) == pytest.approx(3.0)
 
     def test_sum(self, vec: Vec) -> None:

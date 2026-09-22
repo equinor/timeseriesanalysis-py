@@ -89,27 +89,29 @@ def _assert_identified_unit_model(
 
 
 class TestCorrelationCalculator:
-    @pytest.mark.parametrize(
-        ("other_start", "other_end", "expected_correlation"),
-        [(10.0, 0.0, -1.0), (0.0, 10.0, 1.0), (0.0, 0.0, 0.0)],
-    )
-    def test_calculate_correlations(
+    def _calculate_correlation(
         self,
         creator: TimeSeriesCreator,
         other_start: float,
         other_end: float,
-        expected_correlation: float,
-    ) -> None:
+    ) -> float:
         data_set = TimeSeriesDataSet()
         data_set.Add("main", creator.Step(5, 10, 0.0, 10.0))
         data_set.Add("other", creator.Step(5, 10, other_start, other_end))
 
-        correlations = CorrelationCalculator().Calculate("main", data_set)
+        return CorrelationCalculator().Calculate("main", data_set)["other"]
 
-        assert correlations["other"] == pytest.approx(expected_correlation)
+    def test_correlate_to_oppsite(self, creator: TimeSeriesCreator) -> None:
+        assert self._calculate_correlation(creator, 10.0, 0.0) == pytest.approx(-1.0)
+
+    def test_correlate_to_self(self, creator: TimeSeriesCreator) -> None:
+        assert self._calculate_correlation(creator, 0.0, 10.0) == pytest.approx(1.0)
+
+    def test_correlate_to_zero(self, creator: TimeSeriesCreator) -> None:
+        assert self._calculate_correlation(creator, 0.0, 0.0) == pytest.approx(0.0)
 
     @pytest.mark.parametrize("ordered_input", [True, False])
-    def test_calculate_and_order_sorts_by_correlation(
+    def test_correlate_and_order(
         self,
         creator: TimeSeriesCreator,
         ordered_input: bool,
@@ -140,7 +142,7 @@ class TestUnitIdentification:
         ("bias", "time_constant_s", "time_delay_s"),
         [(0.0, 0.0, 0.0), (0.0, 10.0, 0.0), (5.0, 10.0, 5.0)],
     )
-    def test_identify_single_linear_input(
+    def test_i1_linear(
         self,
         creator: TimeSeriesCreator,
         bias: float,
@@ -163,7 +165,7 @@ class TestUnitIdentification:
 
         _assert_identified_unit_model(model, parameters)
 
-    def test_identify_two_linear_inputs(self, creator: TimeSeriesCreator) -> None:
+    def test_i2_linear_twosteps(self, creator: TimeSeriesCreator) -> None:
         parameters = UnitParameters()
         parameters.TimeConstant_s = 15.0
         parameters.TimeDelay_s = 0.0
@@ -204,7 +206,7 @@ class TestPidIdentification:
         ("setpoint_amplitude", "noise_amplitude", "tolerance_percent"),
         [(1.0, 0.01, 5.0), (2.0, 0.01, 5.0)],
     )
-    def test_identify_from_setpoint_step(
+    def test_setpoint_step_w_noise_kp_and_ti_estimated_ok(
         self,
         creator: TimeSeriesCreator,
         pid_system: tuple[PidParameters, PidModel, UnitModel, PlantSimulator],
@@ -244,7 +246,7 @@ class TestPidIdentification:
 
 class TestGainSchedulingIdentification:
     @pytest.mark.parametrize("noise_amplitude", [0.0, 1.0])
-    def test_identify_given_gain_thresholds(
+    def test_five_gains_static_step_change_for_given_thresholds_correct_gains(
         self,
         creator: TimeSeriesCreator,
         noise_amplitude: float,
