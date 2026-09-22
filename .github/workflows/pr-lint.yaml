@@ -1,0 +1,30 @@
+name: Pull Request Title Linter
+
+permissions: {}
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+      - ready_for_review
+      - labeled
+      - unlabeled
+
+jobs:
+  lint-pr:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    if: "!contains(github.event.pull_request.labels.*.name, 'autorelease: pending')"
+
+    steps:
+      - name: Lint pull request title
+        uses: jef/conventional-commits-pr-action@2ee589f151916f92da5e2887c38d5fe6402e803c # v1.3.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}

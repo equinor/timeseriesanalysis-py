@@ -4,7 +4,7 @@
     "packages": {
         ".": {
             "release-type": "python",
-            "package-name": "timeseriesanalysis-py"
+            "package-name": "timeseriesanalysis"
         }
     }
 }
