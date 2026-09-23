@@ -1,1 +1,3 @@
+# Contributing
+
 Contributions of all kinds to the project are welcome, including code, feature requests and documentation, and should be submitted via pull requests. We strive to follow the commit message conventions laid out in [this guide](https://cbea.ms/git-commit/).
