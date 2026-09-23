@@ -18,6 +18,13 @@ uv run publish-assemblies vX.Y.Z
 uv add --editable /path/to/timeseriesanalysis-py
 ```
 
+Install the Plotly-based visualization support when needed:
+
+```bash
+uv sync --extra visualization
+uv add --editable '/path/to/timeseriesanalysis-py[visualization]'
+```
+
 The package requires the [.NET SDK](https://dotnet.microsoft.com/download), including the CoreCLR runtime. For the complete setup, use one of the development options below.
 
 The package exposes public `TimeSeriesAnalysis` .NET types as Python proxy classes. See the [TimeSeriesAnalysis API documentation](https://equinor.github.io/TimeSeriesAnalysis/api/TimeSeriesAnalysis.html) for the complete API.
