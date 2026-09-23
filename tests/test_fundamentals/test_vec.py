@@ -329,7 +329,10 @@ class TestVec:
             math.nan,
         )
 
-        assert [math.isnan(value) if index in (1, 3) else value for index, value in enumerate(result)] == [
+        assert [
+            math.isnan(value) if index in (1, 3) else value
+            for index, value in enumerate(result)
+        ] == [
             0.0,
             True,
             2.0,
@@ -375,7 +378,9 @@ class TestVec:
         assert math.isnan(actual[-1])
 
     def test_sum_of_abs_errors(self) -> None:
-        result = Vec().SumOfAbsErr(Vec().Add(DoubleArray(range(11)), 1), DoubleArray(range(11)))
+        result = Vec().SumOfAbsErr(
+            Vec().Add(DoubleArray(range(11)), 1), DoubleArray(range(11))
+        )
 
         assert result == pytest.approx(1.0)
 
@@ -401,7 +406,11 @@ class TestVec:
         assert list(DoubleVec.SubArray(DoubleArray(range(11)), 9)) == [9.0, 10.0]
 
     def test_sub_array_gives_correct_sub_array3(self) -> None:
-        assert list(DoubleVec.SubArray(DoubleArray(range(11)), -1, 2)) == [0.0, 1.0, 2.0]
+        assert list(DoubleVec.SubArray(DoubleArray(range(11)), -1, 2)) == [
+            0.0,
+            1.0,
+            2.0,
+        ]
 
     def test_vec_max(self) -> None:
         result = Vec().Max(DoubleArray([0, 1, 2, 3]), DoubleArray([2, 2, 2, 2]))

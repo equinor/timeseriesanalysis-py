@@ -21,7 +21,9 @@ class TestLowPass:
         output_values = LowPass(time_base_s).Filter(input_values, filter_tc_s)
 
         index_at_one_time_constant = 10 + round(filter_tc_s / time_base_s)
-        assert output_values[index_at_one_time_constant] == pytest.approx(0.67, abs=0.02)
+        assert output_values[index_at_one_time_constant] == pytest.approx(
+            0.67, abs=0.02
+        )
 
     def test_low_pass_ignore_indices(self) -> None:
         unfiltered_input = DoubleArray([0.0] * 10 + [1.0] * 30)
