@@ -1,5 +1,5 @@
 import importlib
-from datetime import datetime
+from datetime import UTC, datetime
 from typing import Any
 
 
@@ -48,21 +48,30 @@ class DateTimeArray:
 
     def __new__(cls, values: Any) -> Any:
         system = importlib.import_module("System")
+
+        def to_dotnet_datetime(value: datetime) -> Any:
+            if value.tzinfo is not None:
+                value = value.astimezone(UTC)
+                kind = system.DateTimeKind.Utc
+            else:
+                kind = system.DateTimeKind.Unspecified
+
+            return system.DateTime(
+                value.year,
+                value.month,
+                value.day,
+                value.hour,
+                value.minute,
+                value.second,
+                value.microsecond // 1000,
+                kind,
+            ).AddTicks(
+                (value.microsecond % 1000) * 10
+            )  # Preserve remainder as .NET ticks (1 tick = 100 nanoseconds)
+
         return system.Array[system.DateTime](
             [
-                system.DateTime(
-                    value.year,
-                    value.month,
-                    value.day,
-                    value.hour,
-                    value.minute,
-                    value.second,
-                    value.microsecond // 1000,
-                ).AddTicks(
-                    (value.microsecond % 1000) * 10
-                )  # Preserve remainder as .NET ticks (1 tick = 100 nanoseconds)
-                if isinstance(value, datetime)
-                else value
+                to_dotnet_datetime(value) if isinstance(value, datetime) else value
                 for value in values
             ]
         )
