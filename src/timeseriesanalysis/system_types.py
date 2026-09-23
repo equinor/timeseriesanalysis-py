@@ -58,7 +58,9 @@ class DateTimeArray:
                     value.minute,
                     value.second,
                     value.microsecond // 1000,
-                )
+                ).AddTicks(
+                    (value.microsecond % 1000) * 10
+                )  # Preserve remainder as .NET ticks (1 tick = 100 nanoseconds)
                 if isinstance(value, datetime)
                 else value
                 for value in values
