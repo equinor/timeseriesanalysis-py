@@ -18,16 +18,9 @@ uv run publish-assemblies vX.Y.Z
 uv add --editable /path/to/timeseriesanalysis-py
 ```
 
-Install the Plotly-based visualization support when needed:
+The package requires the [.NET SDK](https://dotnet.microsoft.com/download). For setup details, see development options below.
 
-```bash
-uv sync --extra visualization
-uv add --editable '/path/to/timeseriesanalysis-py[visualization]'
-```
-
-The package requires the [.NET SDK](https://dotnet.microsoft.com/download), including the CoreCLR runtime. For the complete setup, use one of the development options below.
-
-The package exposes public `TimeSeriesAnalysis` .NET types as Python proxy classes. See the [TimeSeriesAnalysis API documentation](https://equinor.github.io/TimeSeriesAnalysis/api/TimeSeriesAnalysis.html) for the complete API.
+The package exposes public `TimeSeriesAnalysis` .NET types as Python proxy classes. The [TimeSeriesAnalysis API documentation](https://equinor.github.io/TimeSeriesAnalysis/api/TimeSeriesAnalysis.html) documents the complete API.
 
 ```python
 from timeseriesanalysis import Vec
@@ -36,6 +29,17 @@ vec = Vec()
 result = vec.Add([1.0, 2.0, 3.0], [4.0, 5.0, 6.0])
 # list(result) => [5.0, 7.0, 9.0]
 ```
+
+### Visualization
+
+For lightweight visualization of model graphs and line charts, install the Plotly-based visualization support when needed:
+
+```bash
+uv sync --extra visualization
+uv add --editable '/path/to/timeseriesanalysis-py[visualization]'
+```
+
+See [`demo_visualization.py`](demo/demo_visualization.py) for usage tips.
 
 ## Development
 
@@ -114,8 +118,7 @@ generate-upstream-test-manifest vX.Y.Z --output reports/missing_tests.txt
 
 ### ~~`.pyi` stub generation~~
 
-[!NOTE]
-Currently not in use
+> **Note:** Currently not in use
 
 Generates `.pyi` type stub files alongside every hand-authored proxy module source file, derived from .NET reflection.
 
