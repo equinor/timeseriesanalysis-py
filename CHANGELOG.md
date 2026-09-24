@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.4.0](https://github.com/equinor/timeseriesanalysis-py/compare/timeseriesanalysis-v0.3.0...timeseriesanalysis-v0.4.0) (2026-09-24)
+
+
+### Features
+
+* Add disturbance identification tests ([#29](https://github.com/equinor/timeseriesanalysis-py/issues/29)) ([8d5f968](https://github.com/equinor/timeseriesanalysis-py/commit/8d5f9688dc2ebaf19abe0703372d0bb19508e425))
+* Add line plotting ([#35](https://github.com/equinor/timeseriesanalysis-py/issues/35)) ([518dc2d](https://github.com/equinor/timeseriesanalysis-py/commit/518dc2d04fe36bc29a1e6a3e6f49c3930be6aef8))
+* Add tests for fundamentals ([#32](https://github.com/equinor/timeseriesanalysis-py/issues/32)) ([7a592cb](https://github.com/equinor/timeseriesanalysis-py/commit/7a592cbb59b6fc705c14236c7c4dabc913296f82))
+* Add visualization for plant simulator ([#34](https://github.com/equinor/timeseriesanalysis-py/issues/34)) ([bd85283](https://github.com/equinor/timeseriesanalysis-py/commit/bd85283ace25823b8e5cfced3a3958aa0bf1b660))
+
+
+### Documentation
+
+* Add SECURITY.md ([#33](https://github.com/equinor/timeseriesanalysis-py/issues/33)) ([c61b758](https://github.com/equinor/timeseriesanalysis-py/commit/c61b758f41fe64904dd9cd6d046d57c57881b196))
+
 ## [0.3.0](https://github.com/equinor/timeseriesanalysis-py/compare/timeseriesanalysis-v0.2.0...timeseriesanalysis-v0.3.0) (2026-09-22)
 
 
