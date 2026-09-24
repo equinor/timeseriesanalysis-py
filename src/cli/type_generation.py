@@ -17,6 +17,9 @@ from cli.class_discovery import HAND_AUTHORED_MODULE_NAMES
 from timeseriesanalysis._runtime import Runtime
 from timeseriesanalysis.dotnet_proxy import DotNetProxy, DotNetStaticProxy
 
+# Flip to True to re-enable the `generate-type-stubs` CLI command (see README).
+ENABLED = False
+
 # Mapping from .NET type full names to Python type annotation strings.
 DOTNET_TO_PYTHON: dict[str, str] = {
     "System.Double": "float",
@@ -206,9 +209,14 @@ def generate_stub_file(
 
 def main() -> None:
     """Generate stub files for all hand-authored proxy modules."""
+    if not ENABLED:
+        raise SystemExit(
+            "generate-type-stubs is currently disabled; set ENABLED = True in "
+            "cli/type_generation.py to re-enable it."
+        )
     for module_name in HAND_AUTHORED_MODULE_NAMES:
         generate_stub_file(module_name)
 
 
-if main.__name__ == "__main__":
+if __name__ == "__main__":
     main()

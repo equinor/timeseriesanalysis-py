@@ -35,7 +35,10 @@ result = vec.Add([1.0, 2.0, 3.0], [4.0, 5.0, 6.0])
 For lightweight visualization of model graphs and line charts, install the Plotly-based visualization support when needed:
 
 ```bash
+cd timeseriesanalysis-py
 uv sync --extra visualization
+
+# In your Python project
 uv add --editable '/path/to/timeseriesanalysis-py[visualization]'
 ```
 
@@ -107,13 +110,13 @@ Downloads the specified `TimeSeriesAnalysis` release, publishes its .NET project
 publish-assemblies vX.Y.Z
 ```
 
-### Generate missing python test implementations
+### Generte report on missing python test implementations
 
 Compares the NUnit tests in an upstream revision with the collected pytest tests and writes the sorted names of upstream tests without a Python counterpart. The report defaults to `reports/missing_tests.txt`; use `--output` to write it elsewhere.
 
 ```bash
-generate-upstream-test-manifest vX.Y.Z
-generate-upstream-test-manifest vX.Y.Z --output reports/missing_tests.txt
+report-missing-tests vX.Y.Z
+report-missing-tests vX.Y.Z --output reports/missing_tests.txt
 ```
 
 ### ~~`.pyi` stub generation~~
@@ -144,13 +147,5 @@ The included `demo.py` script demonstrates basic usage of the `Vec` API.
 
 ```bash
 uv sync
-uv run python demo.py
-```
-
-### Run as an isolated external install
-
-This creates a fresh ephemeral environment, installs the package from source, and runs the demo to verify the package works outside the dev setup:
-
-```bash
-uv run --isolated --with . --env-file .env python demo.py
+uv run python demo/demo.py
 ```
