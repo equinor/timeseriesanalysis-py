@@ -6,7 +6,7 @@ Python bindings for [TimeSeriesAnalysis](https://github.com/equinor/TimeSeriesAn
 
 ## Usage
 
-The package is not yet published on PyPI. Clone it, publish the required .NET assemblies, and add the clone to your Python project as an editable dependency.
+Clone the repository, publish the required .NET assemblies, and add the clone to your Python project as an editable dependency.
 
 ```bash
 git clone https://github.com/equinor/timeseriesanalysis-py.git
