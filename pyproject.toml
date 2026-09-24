@@ -12,6 +12,11 @@ dependencies = [
     "pythonnet>=3.0.5",
 ]
 
+[project.optional-dependencies]
+visualization = [
+    "plotly>=7.1.0",
+]
+
 [project.scripts]
 timeseriesanalysis = "timeseriesanalysis:main"
 check-missing-classes = "cli.class_discovery:main"
@@ -31,4 +36,9 @@ module-name = ["timeseriesanalysis", "cli"]
 dev = [
     "pytest>=9.0.3",
     "ruff>=0.16.7",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "visualization: tests for the timeseriesanalysis.visualization package",
 ]
