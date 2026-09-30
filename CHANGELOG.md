@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/equinor/timeseriesanalysis-py/compare/timeseriesanalysis-v0.4.0...timeseriesanalysis-v0.4.1) (2026-09-24)
+
+
+### Documentation
+
+* Update readme ([#36](https://github.com/equinor/timeseriesanalysis-py/issues/36)) ([e3ceb62](https://github.com/equinor/timeseriesanalysis-py/commit/e3ceb62c66a354e128fb027c1d66263459e38420))
+
 ## [0.4.0](https://github.com/equinor/timeseriesanalysis-py/compare/timeseriesanalysis-v0.3.0...timeseriesanalysis-v0.4.0) (2026-09-24)
 
 
